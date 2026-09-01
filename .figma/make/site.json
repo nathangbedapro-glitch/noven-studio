@@ -1,0 +1,10 @@
+{
+  "description": "Create stunning landing pages effortlessly with customizable templates designed for businesses, enhancing online presence and engagement.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
