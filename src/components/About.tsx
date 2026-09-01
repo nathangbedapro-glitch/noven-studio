@@ -63,7 +63,7 @@ export default function About() {
               <LinkedInIcon />
             </a>
             <a
-              href="mailto:nathan@novenstudio.fr"
+              href="mailto:novenstudio.design@gmail.com"
               aria-label="Email"
               className="text-ink/70 transition-colors hover:text-terracotta"
             >

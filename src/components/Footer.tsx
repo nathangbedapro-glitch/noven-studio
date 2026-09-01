@@ -33,10 +33,10 @@ export default function Footer() {
 
         <div className="flex flex-col gap-2 md:items-end md:text-right">
           <a
-            href="mailto:nathan@novenstudio.fr"
+            href="mailto:novenstudio.design@gmail.com"
             className="link-underline w-fit text-[15px] text-ink/75 hover:text-ink md:self-end"
           >
-            nathan@novenstudio.fr
+            novenstudio.design@gmail.com
           </a>
           <p className="text-[13px] text-muted">
             © 2026 Noven Studio — Fait à Paris

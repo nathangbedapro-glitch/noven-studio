@@ -20,7 +20,7 @@ export default function Contact() {
               booking link (or whichever scheduler is used) before going live. */}
           <Button href="https://calendly.com">Prendre rendez-vous</Button>
           <a
-            href="mailto:nathan@novenstudio.fr"
+            href="mailto:novenstudio.design@gmail.com"
             className="link-underline text-[15px] font-medium text-ink"
           >
             Envoyer un email
@@ -28,7 +28,7 @@ export default function Contact() {
         </div>
 
         <p className="mt-10 text-[13px] text-muted">
-          Ou directement&nbsp;: nathan@novenstudio.fr
+          Ou directement&nbsp;: novenstudio.design@gmail.com
         </p>
       </div>
     </section>
