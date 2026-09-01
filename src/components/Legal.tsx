@@ -1,46 +1,37 @@
 import type { ReactNode } from "react";
+import Button from "./Button";
 import Eyebrow from "./Eyebrow";
 import SectionHeading from "./SectionHeading";
 import { useReveal } from "../hooks/useReveal";
 
-/*
- * TODO — contenu à valider avant mise en ligne.
- *
- * La structure des sections (legal-01 à legal-05) et le texte non factuel
- * ci-dessous sont un squelette : le contenu de la page légale du prototype
- * Claude Design n'a pas pu être lu (projet non autorisé pour cette session).
- * Chaque valeur juridiquement opposable — raison sociale, SIRET, adresse,
- * hébergeur, durées de conservation — est laissée en `<Todo>` visible plutôt
- * qu'inventée : une mention légale fausse engage la responsabilité de
- * l'éditeur. À faire relire par un professionnel avant publication.
- *
- * Le site est actuellement en `robots: { index: false }` (.figma/make/site.json),
- * donc cette page n'est pas indexable en l'état.
+/**
+ * Single source for the section list: the table of contents and the section
+ * headings below are both built from it, so anchors and titles can't drift.
+ * Ids match the `#legal-NN` route anchors resolved in App.
  */
-
-/** Marqueur visible pour une valeur juridiquement opposable à fournir. */
-function Todo({ children }: { children: string }) {
-  return (
-    <span className="rounded-[2px] bg-terracotta/10 px-1.5 py-0.5 text-[0.95em] text-terracotta">
-      [à compléter — {children}]
-    </span>
-  );
-}
+const sections = [
+  { id: "legal-01", number: "01", title: "Mentions légales" },
+  { id: "legal-02", number: "02", title: "Conditions générales de vente" },
+  { id: "legal-03", number: "03", title: "Conditions générales d'utilisation" },
+  { id: "legal-04", number: "04", title: "Confidentialité (RGPD)" },
+  { id: "legal-05", number: "05", title: "Cookies" },
+  { id: "legal-06", number: "06", title: "Contact" },
+] as const;
 
 function Section({
   id,
-  eyebrow,
+  number,
   title,
   children,
 }: {
   id: string;
-  eyebrow: string;
+  number: string;
   title: string;
   children: ReactNode;
 }) {
   return (
     <section id={id} className="scroll-mt-28 border-t border-hairline pt-14">
-      <SectionHeading eyebrow={eyebrow} title={title} />
+      <SectionHeading eyebrow={number} title={title} />
       <div className="mt-8 space-y-6 text-[15px] leading-relaxed text-muted">
         {children}
       </div>
@@ -57,8 +48,28 @@ function Row({ label, children }: { label: string; children: ReactNode }) {
   );
 }
 
-function SubHeading({ children }: { children: string }) {
-  return <h3 className="text-[16px] font-semibold text-ink">{children}</h3>;
+function Ext({ href, children }: { href: string; children: string }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noreferrer"
+      className="link-underline text-ink"
+    >
+      {children}
+    </a>
+  );
+}
+
+function Mail() {
+  return (
+    <a
+      href="mailto:novenstudio.design@gmail.com"
+      className="link-underline text-ink"
+    >
+      novenstudio.design@gmail.com
+    </a>
+  );
 }
 
 export default function Legal() {
@@ -77,153 +88,217 @@ export default function Legal() {
           <div className="mt-10">
             <Eyebrow>Informations légales</Eyebrow>
             <h1 className="mt-5 font-serif text-[clamp(3rem,7vw,4.5rem)] font-medium leading-[1.0] tracking-[-0.01em]">
-              Mentions légales et confidentialité
+              Mentions légales et conditions
             </h1>
-            <p className="mt-7 text-[15px] leading-relaxed text-muted">
-              Dernière mise à jour : <Todo>date de publication</Todo>
-            </p>
           </div>
+
+          <nav aria-label="Sommaire" className="mt-14 border-t border-hairline pt-8">
+            <Eyebrow>Sommaire</Eyebrow>
+            <ol className="mt-5 space-y-2.5">
+              {sections.map((s) => (
+                <li key={s.id}>
+                  <a
+                    href={`#${s.id}`}
+                    className="link-underline text-[15px] text-ink/80 transition-colors hover:text-ink"
+                  >
+                    <span className="text-terracotta">{s.number}</span> —{" "}
+                    {s.title}
+                  </a>
+                </li>
+              ))}
+            </ol>
+          </nav>
         </div>
 
         <div className="mt-16 space-y-16">
-          <Section id="legal-01" eyebrow="01" title="Mentions légales">
+          <Section {...sections[0]}>
             <Row label="Éditeur du site">
-              Noven Studio, <Todo>forme juridique</Todo>, représenté par Nathan
-              GBEDA.
+              Noven Studio — Nathan GBEDA (Entrepreneur Individuel)
             </Row>
-            <Row label="Siège social">
-              <Todo>adresse postale complète</Todo>
+            <Row label="Adresse">88 Rue Edouard Vaillant, 93700 Drancy</Row>
+            <Row label="SIRET">[SIRET — immatriculation en cours]</Row>
+            <Row label="N° TVA intracommunautaire">
+              TVA non applicable, article 293 B du CGI (franchise en base)
             </Row>
-            <Row label="Immatriculation">
-              SIRET <Todo>numéro SIRET</Todo> — RCS <Todo>ville et numéro</Todo>
+            <Row label="Directeur de la publication">
+              Nathan GBEDA, fondateur
             </Row>
-            <Row label="Numéro de TVA intracommunautaire">
-              <Todo>numéro de TVA, ou mention de franchise en base</Todo>
+            <Row label="Email">
+              <Mail />
             </Row>
-            <Row label="Directeur de la publication">Nathan GBEDA</Row>
-            <Row label="Contact">
-              <a
-                href="mailto:novenstudio.design@gmail.com"
-                className="link-underline text-ink"
-              >
-                novenstudio.design@gmail.com
+            <Row label="Téléphone">
+              <a href="tel:+33635105871" className="link-underline text-ink">
+                +33 6 35 10 58 71
               </a>
             </Row>
-          </Section>
-
-          <Section id="legal-02" eyebrow="02" title="Hébergement">
             <Row label="Hébergeur">
-              <Todo>raison sociale de l'hébergeur</Todo>
+              Vercel Inc. — 340 S Lemon Ave #4133, Walnut, CA 91789, États-Unis
+              (<Ext href="https://vercel.com/help">vercel.com/help</Ext>)
             </Row>
-            <Row label="Adresse">
-              <Todo>adresse postale de l'hébergeur</Todo>
-            </Row>
-            <p>
-              L'hébergeur assure le stockage et la mise à disposition du site.
-              Il n'intervient pas sur le contenu éditorial, qui relève de la
-              seule responsabilité de l'éditeur.
-            </p>
-          </Section>
-
-          <Section
-            id="legal-03"
-            eyebrow="03"
-            title="Propriété intellectuelle"
-          >
-            <p>
-              L'ensemble des éléments composant ce site — structure, textes,
-              identité visuelle, typographies, images et code source — est
-              protégé par le droit de la propriété intellectuelle. Sauf mention
-              contraire, ces éléments sont la propriété exclusive de Noven
-              Studio.
-            </p>
-            <p>
-              Toute reproduction, représentation, adaptation ou exploitation,
-              totale ou partielle, sur quelque support que ce soit, est interdite
-              sans autorisation écrite préalable.
-            </p>
-            <p>
-              Les projets présentés dans la section Réalisations sont publiés
-              avec l'accord des clients concernés. Les marques et logos qui y
-              figurent restent la propriété de leurs titulaires respectifs.
-            </p>
-          </Section>
-
-          <Section
-            id="legal-04"
-            eyebrow="04"
-            title="Politique de confidentialité"
-          >
-            <p>
-              Noven Studio traite les données personnelles collectées via ce
-              site conformément au Règlement général sur la protection des
-              données (RGPD) et à la loi Informatique et Libertés.
-            </p>
-
-            <SubHeading>Données collectées et finalités</SubHeading>
-            <p>
-              Les données transmises via le formulaire de contact ou par email —
-              nom, adresse email et contenu du message — sont utilisées
-              uniquement pour répondre à la demande et, le cas échéant, établir
-              une proposition commerciale. La base légale de ce traitement est
-              l'exécution de mesures précontractuelles prises à la demande de la
-              personne concernée.
-            </p>
-
-            <SubHeading>Durée de conservation</SubHeading>
-            <p>
-              Les données de prospection sont conservées{" "}
-              <Todo>durée de conservation retenue</Todo> à compter du dernier
-              contact. Les données liées à une relation contractuelle sont
-              conservées pour la durée légale applicable aux documents
-              comptables.
-            </p>
-
-            <SubHeading>Destinataires et sous-traitants</SubHeading>
-            <p>
-              Les données ne sont ni vendues ni cédées à des tiers. Elles
-              peuvent être traitées par les prestataires techniques nécessaires
-              au fonctionnement du site :{" "}
-              <Todo>liste des sous-traitants et pays d'hébergement</Todo>
-            </p>
-
-            <SubHeading>Vos droits</SubHeading>
-            <p>
-              Vous disposez d'un droit d'accès, de rectification, d'effacement,
-              de limitation, d'opposition et de portabilité sur vos données. Ces
-              droits s'exercent par email à{" "}
-              <a
-                href="mailto:novenstudio.design@gmail.com"
-                className="link-underline text-ink"
-              >
-                novenstudio.design@gmail.com
+            <Row label="Propriété intellectuelle">
+              L'ensemble du contenu de ce site (textes, visuels, code source,
+              charte graphique) est la propriété exclusive de Noven Studio, sauf
+              mention contraire. Toute reproduction ou représentation, totale ou
+              partielle, est interdite sans autorisation écrite préalable. Les
+              livrables réalisés dans le cadre d'une prestation font l'objet
+              d'une cession de droits encadrée à la section{" "}
+              <a href="#legal-02" className="link-underline text-ink">
+                Conditions générales de vente
               </a>
-              . Une réponse vous sera apportée dans un délai d'un mois.
+              .
+            </Row>
+          </Section>
+
+          <Section {...sections[1]}>
+            <Row label="Objet">
+              Les présentes CGV régissent la relation entre Noven Studio
+              («&nbsp;le Prestataire&nbsp;») et tout client («&nbsp;le
+              Client&nbsp;») souscrivant à une prestation de refonte ou création
+              de site web.
+            </Row>
+            <Row label="Description de la prestation">
+              Pack Refonte / Création : design sur-mesure (5 à 7 pages), site
+              responsive, formulaire de contact fonctionnel, newsletter
+              connectée, statistiques Google Analytics, conformité RGPD, repo
+              GitHub et Vercel au nom du client, passation à la livraison —
+              1&nbsp;600&nbsp;€ HT. Option SEO Complet (recherche mots-clés,
+              Schema.org, 3 articles rédigés) : 500&nbsp;€ HT, sur souscription
+              séparée. Maintenance mensuelle (modifications, support 48h, 1
+              section par trimestre) : 120&nbsp;€/mois, contrat séparé et
+              optionnel, jamais incluse dans le total de la prestation initiale.
+            </Row>
+            <Row label="Délai de livraison">
+              14 jours calendaires à compter de la réception de l'acompte ET des
+              éléments fournis par le client. Tout retard dans la transmission
+              des éléments entraîne un report du délai.
+            </Row>
+            <Row label="Révisions">
+              1 round de révisions est inclus. Toute demande supplémentaire fait
+              l'objet d'un devis complémentaire au tarif de 80&nbsp;€/heure.
+            </Row>
+            <Row label="Paiement">
+              Acompte de 50&nbsp;% à la signature. Solde de 50&nbsp;% à la
+              livraison, payable sous 7 jours. Pénalités de retard : 3 fois le
+              taux d'intérêt légal en vigueur, applicables dès le premier jour de
+              retard.
+            </Row>
+            <Row label="Propriété intellectuelle et cession">
+              À compter du règlement intégral, le Client devient propriétaire des
+              éléments livrés. Noven Studio conserve le droit de présenter le
+              projet réalisé dans son portfolio, sauf opposition écrite du Client
+              dans les 30 jours suivant la livraison.
+            </Row>
+            <Row label="Obligations du Client">
+              Fournir les éléments nécessaires (textes, visuels, informations)
+              dans un délai raisonnable ; les délais de livraison sont suspendus
+              dans l'attente d'un retour. Le Client garantit détenir les droits
+              sur les éléments transmis.
+            </Row>
+            <Row label="Résiliation">
+              En cas d'annulation par le Client après signature, l'acompte versé
+              reste acquis à Noven Studio à titre d'indemnité forfaitaire.
+            </Row>
+            <Row label="Droit applicable">
+              Droit français. En cas de litige, les parties recherchent une
+              solution amiable avant tout recours judiciaire. Plateforme
+              européenne de règlement en ligne :{" "}
+              <Ext href="https://ec.europa.eu/consumers/odr">
+                ec.europa.eu/consumers/odr
+              </Ext>
+            </Row>
+          </Section>
+
+          <Section {...sections[2]}>
+            <Row label="Acceptation">
+              L'accès au site implique l'acceptation sans réserve des présentes
+              CGU.
+            </Row>
+            <Row label="Accès au service">
+              Le site est accessible 24h/24, sauf interruption pour maintenance
+              ou cas de force majeure.
+            </Row>
+            <Row label="Comportements interdits">
+              L'utilisateur s'engage à ne pas utiliser le site à des fins
+              illicites, à ne pas porter atteinte à son intégrité technique, ni à
+              reproduire son contenu sans autorisation.
+            </Row>
+            <Row label="Liens externes">
+              Noven Studio n'exerce aucun contrôle sur les sites tiers
+              éventuellement liés et décline toute responsabilité quant à leur
+              contenu.
+            </Row>
+            <Row label="Modification">
+              Les présentes CGU peuvent être modifiées à tout moment. La version
+              applicable est celle en ligne au jour de la consultation.
+            </Row>
+          </Section>
+
+          <Section {...sections[3]}>
+            <Row label="Responsable du traitement">
+              Nathan GBEDA — Noven Studio, coordonnées en section{" "}
+              <a href="#legal-01" className="link-underline text-ink">
+                Mentions légales
+              </a>
+              .
+            </Row>
+            <Row label="Données collectées">
+              À ce jour, ce site ne comporte aucun formulaire de collecte de
+              données ni outil de mesure d'audience. Les seules données
+              techniques traitées sont celles inhérentes à l'hébergement
+              (journaux serveur Vercel), à des fins de sécurité. Si vous nous
+              contactez par email ou par prise de rendez-vous, les informations
+              transmises (nom, email, message) sont utilisées uniquement pour
+              répondre à votre demande et ne sont ni conservées au-delà du
+              traitement de l'échange, ni cédées à des tiers.
+            </Row>
+            <Row label="Vos droits">
+              Conformément au RGPD, vous disposez d'un droit d'accès, de
+              rectification, d'effacement, de limitation et d'opposition sur vos
+              données. Pour l'exercer, contactez <Mail />. Vous pouvez également
+              saisir la CNIL (<Ext href="https://www.cnil.fr">cnil.fr</Ext>).
+            </Row>
+            <Row label="Évolution">
+              Cette politique sera mise à jour si le site intègre à l'avenir un
+              formulaire, une newsletter ou un outil de mesure d'audience.
+            </Row>
+          </Section>
+
+          <Section {...sections[4]}>
+            <p>
+              Ce site n'utilise actuellement aucun cookie non essentiel (pas de
+              mesure d'audience, pas de cookie publicitaire ou tiers). Seuls des
+              cookies strictement techniques, indispensables au bon
+              fonctionnement du site, peuvent être déposés — sans consentement
+              requis pour ceux-ci.
             </p>
             <p>
-              En cas de désaccord persistant, vous pouvez introduire une
-              réclamation auprès de la CNIL (3 place de Fontenoy, 75007 Paris —
-              cnil.fr).
+              Si un outil de mesure d'audience ou de suivi est ajouté
+              ultérieurement, un bandeau de consentement conforme sera mis en
+              place avant toute collecte, et cette page sera mise à jour en
+              conséquence.
             </p>
           </Section>
 
-          <Section id="legal-05" eyebrow="05" title="Cookies">
+          <Section {...sections[5]}>
             <p>
-              <Todo>
-                à confirmer selon les outils réellement installés sur le site
-              </Todo>
+              Pour toute question relative aux présentes mentions, ou pour
+              exercer vos droits :
             </p>
-            <p>
-              En l'absence d'outil de mesure d'audience ou de traceur
-              publicitaire, seuls des cookies strictement nécessaires au
-              fonctionnement du site sont susceptibles d'être déposés. Ces
-              cookies sont exemptés de consentement préalable.
-            </p>
-            <p>
-              Si un outil de mesure d'audience venait à être ajouté, un bandeau
-              de consentement conforme aux recommandations de la CNIL serait mis
-              en place et cette section mise à jour en conséquence.
-            </p>
+            <Row label="Par email">
+              <Mail />
+            </Row>
+            <Row label="Par courrier">
+              88 Rue Edouard Vaillant, 93700 Drancy
+            </Row>
+            <Row label="Médiation">
+              En cas de litige non résolu à l'amiable, un client consommateur
+              peut saisir gratuitement un médiateur de la consommation.
+            </Row>
+            <div className="pt-4">
+              <Button href="mailto:novenstudio.design@gmail.com">
+                Nous écrire
+              </Button>
+            </div>
           </Section>
         </div>
       </div>
