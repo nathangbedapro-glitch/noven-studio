@@ -1,8 +1,8 @@
 import Logo from "./Logo";
 
 const legalLinks = [
-  { label: "Mentions légales", href: "#" },
-  { label: "Politique de confidentialité", href: "#" },
+  { label: "Mentions légales", href: "#legal-01" },
+  { label: "Politique de confidentialité", href: "#legal-04" },
   // TODO: placeholder from the prototype — point this at the real Noven Studio
   // LinkedIn page before going live.
   { label: "LinkedIn", href: "https://www.linkedin.com" },
