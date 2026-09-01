@@ -1,3 +1,8 @@
+import alvoVisual from "../assets/images/alvo-visual.png";
+import carrefourVisual from "../assets/images/carrefour-visual.png";
+import michelFerrandVisual from "../assets/images/michel-ferrand-visual.png";
+import petcareVisual from "../assets/images/petcare-visual.png";
+
 export type Stat = { value: string; label: string };
 
 export type Project = {
@@ -6,7 +11,8 @@ export type Project = {
   type: string;
   year: string;
   description: string; // homepage card
-  visual: string; // placeholder mockup label
+  visual: string; // placeholder mockup label, shown when `image` is absent
+  image?: string; // real artwork; Mahbouli has none yet and keeps its label
   role: string;
   industry: string;
   challenge: string;
@@ -47,6 +53,7 @@ export const projects: Project[] = [
     description:
       "Refonte des fiches annonces et de la recherche. +18 % d'interactions post-lancement.",
     visual: "Dashboard desktop",
+    image: alvoVisual,
     role: "Product Designer",
     industry: "Marketplace B2B, transmission d'entreprise",
     challenge:
@@ -73,6 +80,7 @@ export const projects: Project[] = [
     description:
       "Conception d'interfaces pour une marque établie du secteur du luxe, en collaboration avec l'agence.",
     visual: "Site éditorial",
+    image: michelFerrandVisual,
     role: "UX/UI Designer",
     industry: "Luxe & ameublement",
     challenge:
@@ -94,6 +102,7 @@ export const projects: Project[] = [
     description:
       "'Le Grand Tournoi' : plateforme mobile-first pour fédérer 100 000 collaborateurs autour des Jeux Olympiques.",
     visual: "Plateforme mobile-first",
+    image: carrefourVisual,
     role: "UX/UI Designer",
     industry: "Grande distribution, partenaire JO Paris 2024",
     challenge:
@@ -119,6 +128,7 @@ export const projects: Project[] = [
     description:
       "Concept complet : dashboard pro pour sitters, messagerie organisée, transparence tarifaire.",
     visual: "App mobile + dashboard",
+    image: petcareVisual,
     role: "Product Designer (projet personnel)",
     industry: "PetTech",
     challenge:

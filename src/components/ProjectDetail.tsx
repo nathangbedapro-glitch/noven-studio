@@ -1,5 +1,6 @@
 import Eyebrow from "./Eyebrow";
 import Contact from "./Contact";
+import MediaFrame from "./MediaFrame";
 import { useReveal } from "../hooks/useReveal";
 import type { Project } from "../data/projects";
 
@@ -45,11 +46,13 @@ export default function ProjectDetail({ project: p }: { project: Project }) {
         {/* Section B — Visual */}
         <div className="px-6 py-16 md:px-10 md:py-20">
           <div className="mx-auto max-w-[1000px]">
-            <div className="flex aspect-[16/9] items-center justify-center rounded-[3px] border border-hairline bg-beige">
-              <span className="font-serif text-[1.125rem] italic text-muted">
-                {p.visual}
-              </span>
-            </div>
+            <MediaFrame
+              src={p.image}
+              alt={`Aperçu du site ${p.name}`}
+              label={p.visual}
+              ratio="16/9"
+              labelClassName="text-[1.125rem]"
+            />
           </div>
         </div>
 

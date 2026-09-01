@@ -1,18 +1,20 @@
 import Button from "./Button";
 import Eyebrow from "./Eyebrow";
+import MediaFrame from "./MediaFrame";
 import { useReveal } from "../hooks/useReveal";
 import { projects, type Project } from "../data/projects";
 
 function ProjectCard({ p }: { p: Project }) {
   return (
     <a href={`#/projects/${p.slug}`} className="group block cursor-pointer">
-      <div className="relative aspect-[16/10] overflow-hidden rounded-[3px] border border-hairline bg-beige">
-        {/* Placeholder mockup block */}
-        <div className="absolute inset-0 flex items-center justify-center transition-transform duration-500 ease-out group-hover:scale-[1.03]">
-          <span className="font-serif text-[15px] italic text-muted">
-            {p.visual}
-          </span>
-        </div>
+      <div className="relative overflow-hidden rounded-[3px]">
+        <MediaFrame
+          src={p.image}
+          alt={`Aperçu du site ${p.name}`}
+          label={p.visual}
+          ratio="16/10"
+          mediaClassName="transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+        />
         {/* Terracotta overlay on hover */}
         <div className="absolute inset-0 flex items-center justify-center bg-terracotta/0 opacity-0 transition-all duration-300 group-hover:bg-terracotta/85 group-hover:opacity-100">
           <span className="text-[15px] font-medium tracking-wide text-paper">

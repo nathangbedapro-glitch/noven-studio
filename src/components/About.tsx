@@ -1,5 +1,7 @@
 import Eyebrow from "./Eyebrow";
+import MediaFrame from "./MediaFrame";
 import { useReveal } from "../hooks/useReveal";
+import nathanPortrait from "../assets/images/nathan-portrait.png";
 
 function LinkedInIcon() {
   return (
@@ -27,13 +29,14 @@ export default function About() {
         ref={ref}
         className="reveal mx-auto grid max-w-[1100px] items-center gap-12 md:grid-cols-[40fr_60fr] md:gap-16"
       >
-        {/* Photo placeholder */}
+        {/* Portrait */}
         <div className="mx-auto w-full max-w-[340px] md:mx-0">
-          <div className="flex aspect-[4/5] items-center justify-center rounded-[3px] border-2 border-terracotta/70 bg-beige">
-            <span className="font-serif text-[1.5rem] italic text-muted">
-              Photo
-            </span>
-          </div>
+          <MediaFrame
+            src={nathanPortrait}
+            alt="Portrait de Nathan GBEDA, fondateur de Noven Studio"
+            ratio="4/5"
+            border="accent"
+          />
         </div>
 
         {/* Bio */}
