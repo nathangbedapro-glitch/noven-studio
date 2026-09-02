@@ -18,11 +18,12 @@ function ProjectCard({ p }: { p: Project }) {
         {/* Terracotta overlay on hover */}
         <div className="absolute inset-0 flex items-center justify-center bg-terracotta/0 opacity-0 transition-all duration-300 group-hover:bg-terracotta/60 group-hover:opacity-100">
           {/*
-            Le voile à 60 % laisse passer l'image, ce qui fait tomber le
-            contraste du libellé à ~1,9:1 sur un visuel clair. L'ombre portée
-            lui redonne un bord sombre sans assombrir le voile.
+            Le libellé porte son propre fond opaque plutôt que de s'appuyer sur
+            le voile : le contraste ne dépend donc plus de l'image. Sur --ink à
+            95 %, il vaut au minimum 15,3:1 quelle que soit la photo dessous,
+            contre 1,9:1 quand le texte reposait sur le seul voile.
           */}
-          <span className="text-[15px] font-medium tracking-wide text-paper [text-shadow:0_1px_3px_rgba(26,26,26,0.6)]">
+          <span className="rounded-full bg-ink/95 px-5 py-2.5 text-[15px] font-medium tracking-wide text-paper">
             Voir le projet →
           </span>
         </div>
