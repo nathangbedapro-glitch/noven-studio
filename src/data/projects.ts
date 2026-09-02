@@ -1,3 +1,4 @@
+import mahbouliVisual from "../assets/images/mahbouli-visual.png";
 import alvoVisual from "../assets/images/alvo-visual.png";
 import carrefourVisual from "../assets/images/carrefour-visual.png";
 import michelFerrandVisual from "../assets/images/michel-ferrand-visual.png";
@@ -12,7 +13,8 @@ export type Project = {
   year: string;
   description: string; // homepage card
   visual: string; // placeholder mockup label, shown when `image` is absent
-  image?: string; // real artwork; Mahbouli has none yet and keeps its label
+  image?: string; // real artwork; falls back to the `visual` label when absent
+  imageAlt?: string; // overrides the generic alt when the project needs its own
   role: string;
   industry: string;
   challenge: string;
@@ -31,6 +33,9 @@ export const projects: Project[] = [
     description:
       "Refonte complète : 9 domaines d'expertise, calculateurs juridiques, architecture technique moderne.",
     visual: "Site vitrine — navy & or",
+    image: mahbouliVisual,
+    imageAlt:
+      "Aperçu du site Cabinet Mahbouli, refonte complète pour un cabinet d'avocats parisien",
     role: "Conception & développement (Noven Studio)",
     industry: "Cabinet d'avocats",
     challenge:

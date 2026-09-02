@@ -10,7 +10,7 @@ function ProjectCard({ p }: { p: Project }) {
       <div className="relative overflow-hidden rounded-[3px]">
         <MediaFrame
           src={p.image}
-          alt={`Aperçu du site ${p.name}`}
+          alt={p.imageAlt ?? `Aperçu du site ${p.name}`}
           label={p.visual}
           ratio="16/10"
           mediaClassName="transition-transform duration-500 ease-out group-hover:scale-[1.03]"

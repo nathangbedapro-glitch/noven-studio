@@ -48,7 +48,7 @@ export default function ProjectDetail({ project: p }: { project: Project }) {
           <div className="mx-auto max-w-[1000px]">
             <MediaFrame
               src={p.image}
-              alt={`Aperçu du site ${p.name}`}
+              alt={p.imageAlt ?? `Aperçu du site ${p.name}`}
               label={p.visual}
               ratio="16/9"
               labelClassName="text-[1.125rem]"
