@@ -8,11 +8,12 @@ puis vérification runtime finale (axe-core + Playwright sur les 7 routes).
 
 ## État global
 
-| Statut | Nombre |
-|---|---|
-| ✅ Corrigé | 26 |
-| ⏸ En attente (exclus de cette passe) | 3 |
-| **Total** | **29** |
+| Statut | Nombre | Détail |
+|---|---|---|
+| ✅ Corrigé | 28 | dont 3 régressions détectées sur la preview (#30, #31, #32) |
+| ⚠️ Constat erroné | 1 | #19 — l'interlignage n'a jamais été à 1,2 |
+| ⏸ En attente | 3 | #1 SIRET, #25 og:image, #26 poids des images |
+| **Total** | **32** | |
 
 ### Mesures avant / après
 
