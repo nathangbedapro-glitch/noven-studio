@@ -5,6 +5,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title><!-- figma:title --></title>
+    <link rel="icon" type="image/png" href="/og-image.png" />
+    <!--
+      og:title et og:description sont injectés depuis .figma/make/site.json
+      par le plugin figma-site-configuration (vite.config.ts) : ne pas les
+      redéclarer ici, ce serait un doublon. L'aperçu de lien exige une URL
+      absolue, donc le domaine de déploiement est écrit en dur.
+    -->
+    <meta
+      property="og:image"
+      content="https://noven-studio.vercel.app/og-image-landscape.jpg"
+    />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:image"
+      content="https://noven-studio.vercel.app/og-image-landscape.jpg"
+    />
     <!-- figma:head-end -->
   </head>
   <body>
