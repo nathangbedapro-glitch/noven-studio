@@ -71,7 +71,9 @@ export default function Realisations() {
                 Discutons de votre site en 30 minutes
               </p>
               <div className="mt-6">
-                <Button href="#contact">Prendre rendez-vous</Button>
+                <Button href="https://cal.com/noven-studio-dbsqdi/rdv" external>
+                  Prendre rendez-vous
+                </Button>
               </div>
             </div>
           </article>

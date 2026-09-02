@@ -27,7 +27,11 @@ export default function Hero() {
           </p>
           <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:gap-4">
             <Button href="#realisations">Voir mes réalisations</Button>
-            <Button href="#contact" variant="secondary">
+            <Button
+              href="https://cal.com/noven-studio-dbsqdi/rdv"
+              variant="secondary"
+              external
+            >
               Prendre rendez-vous
             </Button>
           </div>

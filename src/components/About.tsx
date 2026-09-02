@@ -54,19 +54,19 @@ export default function About() {
           </p>
 
           <div className="mt-8 flex items-center gap-5">
-            {/* TODO: placeholder from the prototype — point this at the real
-                Noven Studio LinkedIn page before going live. */}
             <a
-              href="https://www.linkedin.com"
+              href="https://www.linkedin.com/in/nathangbeda/"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               aria-label="LinkedIn"
               className="text-ink/70 transition-colors hover:text-terracotta"
             >
               <LinkedInIcon />
             </a>
+            {/* Adresse personnelle de Nathan — volontairement différente de
+                novenstudio.design@gmail.com utilisée partout ailleurs. */}
             <a
-              href="mailto:novenstudio.design@gmail.com"
+              href="mailto:nathangbedapro@gmail.com"
               aria-label="Email"
               className="text-ink/70 transition-colors hover:text-terracotta"
             >

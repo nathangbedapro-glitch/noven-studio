@@ -16,9 +16,9 @@ export default function Contact() {
         </p>
 
         <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          {/* TODO: placeholder from the prototype — swap in the real Calendly
-              booking link (or whichever scheduler is used) before going live. */}
-          <Button href="https://calendly.com">Prendre rendez-vous</Button>
+          <Button href="https://cal.com/noven-studio-dbsqdi/rdv" external>
+            Prendre rendez-vous
+          </Button>
           <a
             href="mailto:novenstudio.design@gmail.com"
             className="link-underline text-[15px] font-medium text-ink"
@@ -28,7 +28,13 @@ export default function Contact() {
         </div>
 
         <p className="mt-10 text-[13px] text-muted">
-          Ou directement&nbsp;: novenstudio.design@gmail.com
+          Ou directement&nbsp;:{" "}
+          <a
+            href="mailto:novenstudio.design@gmail.com"
+            className="link-underline text-ink"
+          >
+            novenstudio.design@gmail.com
+          </a>
         </p>
       </div>
     </section>

@@ -5,6 +5,8 @@ type Props = {
   href?: string;
   variant?: "primary" | "secondary";
   fullWidth?: boolean;
+  /** Opens in a new tab. Sets `rel` itself so `noopener` is never forgotten. */
+  external?: boolean;
   className?: string;
 };
 
@@ -13,6 +15,7 @@ export default function Button({
   href = "#contact",
   variant = "primary",
   fullWidth = false,
+  external = false,
   className = "",
 }: Props) {
   const base =
@@ -28,6 +31,8 @@ export default function Button({
   return (
     <a
       href={href}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noopener noreferrer" : undefined}
       className={`${base} ${variants[variant]} ${fullWidth ? "w-full" : ""} ${className}`}
     >
       {children}
