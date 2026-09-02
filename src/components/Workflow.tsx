@@ -47,7 +47,7 @@ export default function Workflow() {
                 {s.n}
               </span>
               <h3 className="mt-5 text-[16px] font-semibold">{s.title}</h3>
-              <p className="mt-2 text-[15px] leading-relaxed text-muted">
+              <p className="mt-2 text-[16px] leading-relaxed text-muted">
                 {s.text}
               </p>
             </li>

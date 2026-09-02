@@ -13,9 +13,13 @@ import Legal from "./components/Legal";
 import { useHashRoute } from "./hooks/useHashRoute";
 import { getProject } from "./data/projects";
 
+/** Doit rester aligné sur `description` de .figma/make/site.json. */
+const SITE_DESCRIPTION =
+  "Studio de web design freelance spécialisé dans la refonte de sites pour professions libérales — avocats, kinés, coachs.";
+
 function Home() {
   return (
-    <main>
+    <>
       <Hero />
       <Manifesto />
       <Services />
@@ -23,7 +27,7 @@ function Home() {
       <Realisations />
       <About />
       <Contact />
-    </main>
+    </>
   );
 }
 
@@ -55,6 +59,32 @@ export default function App() {
     else window.scrollTo(0, 0);
   }, [project?.slug, isLegal, legalSection]);
 
+  // Le shell HTML ne porte qu'un seul titre, figé au build depuis site.json.
+  // Le routing par hash ne rechargeant pas la page, chaque vue doit écrire le
+  // sien — sans quoi les 7 vues partagent titre et description.
+  useEffect(() => {
+    const meta = project
+      ? {
+          title: `${project.name} — Réalisation Noven Studio`,
+          description: project.description,
+        }
+      : isLegal
+        ? {
+            title: "Mentions légales et conditions — Noven Studio",
+            description:
+              "Mentions légales, conditions générales de vente et d'utilisation, politique de confidentialité et cookies de Noven Studio.",
+          }
+        : {
+            title: "Noven Studio — Web design pour professions libérales",
+            description: SITE_DESCRIPTION,
+          };
+
+    document.title = meta.title;
+    document
+      .querySelector('meta[name="description"]')
+      ?.setAttribute("content", meta.description);
+  }, [project?.slug, isLegal]);
+
   // Keying the wrapper on the route remounts it on every navigation, which
   // restarts the `route-view` fade + rise animation. Every legal anchor maps
   // to the same key, so jumping between sections scrolls without replaying it.
@@ -66,8 +96,25 @@ export default function App() {
 
   return (
     <div className="min-h-full bg-paper text-ink">
+      {/*
+        Lien d'évitement (WCAG 2.4.1). Le focus est déplacé à la main plutôt que
+        par une ancre : un href="#contenu" modifierait le hash, que le routeur
+        interprète — on quitterait la page projet pour l'accueil.
+      */}
+      <a
+        href="#contenu"
+        onClick={(e) => {
+          e.preventDefault();
+          const el = document.getElementById("contenu");
+          el?.focus();
+          el?.scrollIntoView();
+        }}
+        className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-ink focus:px-5 focus:py-3 focus:text-[15px] focus:font-medium focus:text-paper"
+      >
+        Aller au contenu principal
+      </a>
       <Nav />
-      <div key={routeKey} className="route-view">
+      <main id="contenu" tabIndex={-1} key={routeKey} className="route-view">
         {project ? (
           <ProjectDetail project={project} />
         ) : isLegal ? (
@@ -75,7 +122,7 @@ export default function App() {
         ) : (
           <Home />
         )}
-      </div>
+      </main>
       <Footer />
     </div>
   );

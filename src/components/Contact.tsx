@@ -21,17 +21,17 @@ export default function Contact() {
           </Button>
           <a
             href="mailto:novenstudio.design@gmail.com"
-            className="link-underline text-[15px] font-medium text-ink"
+            className="link-underline inline-flex min-h-11 items-center text-[16px] font-medium text-ink"
           >
             Envoyer un email
           </a>
         </div>
 
-        <p className="mt-10 text-[13px] text-muted">
+        <p className="mt-10 text-[14px] text-muted">
           Ou directement&nbsp;:{" "}
           <a
             href="mailto:novenstudio.design@gmail.com"
-            className="link-underline text-ink"
+            className="link-underline inline-flex min-h-11 items-center text-ink"
           >
             novenstudio.design@gmail.com
           </a>

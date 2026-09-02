@@ -23,7 +23,7 @@ function ProjectCard({ p }: { p: Project }) {
             95 %, il vaut au minimum 15,3:1 quelle que soit la photo dessous,
             contre 1,9:1 quand le texte reposait sur le seul voile.
           */}
-          <span className="rounded-full bg-ink/95 px-5 py-2.5 text-[15px] font-medium tracking-wide text-paper">
+          <span className="rounded-full bg-ink/95 px-5 py-2.5 text-[16px] font-medium tracking-wide text-paper">
             Voir le projet →
           </span>
         </div>
@@ -33,12 +33,12 @@ function ProjectCard({ p }: { p: Project }) {
         <h3 className="font-serif text-[1.5rem] font-medium leading-tight">
           {p.name}
         </h3>
-        <span className="shrink-0 text-[13px] text-muted">{p.year}</span>
+        <span className="shrink-0 text-[14px] text-muted">{p.year}</span>
       </div>
-      <p className="mt-1 text-[13px] font-medium uppercase tracking-[0.1em] text-terracotta">
+      <p className="mt-1 text-[14px] font-medium uppercase tracking-[0.1em] text-terracotta">
         {p.type}
       </p>
-      <p className="mt-3 max-w-[42ch] text-[15px] leading-relaxed text-muted">
+      <p className="mt-3 max-w-[60ch] text-[16px] leading-relaxed text-muted">
         {p.description}
       </p>
     </a>
@@ -63,7 +63,7 @@ export default function Realisations() {
 
           {/* Empty invitation card */}
           <article className="flex flex-col">
-            <div className="flex aspect-[16/10] flex-col items-center justify-center rounded-[3px] border border-dashed border-terracotta/60 px-6 text-center">
+            <div className="flex aspect-[16/10] flex-col items-center justify-center rounded-[3px] border border-dashed border-terracotta px-6 text-center">
               <p className="font-serif text-[1.75rem] font-medium text-ink">
                 Votre projet ici
               </p>

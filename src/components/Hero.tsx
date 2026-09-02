@@ -21,7 +21,7 @@ export default function Hero() {
             Le web design pensé pour votre{" "}
             <em className="font-normal italic text-terracotta">profession.</em>
           </h1>
-          <p className="mt-8 max-w-[30rem] text-[17px] leading-relaxed text-muted">
+          <p className="mt-8 max-w-[36rem] text-[17px] leading-relaxed text-muted">
             Studio indépendant spécialisé dans la refonte de sites pour avocats,
             kinés, coachs et professionnels indépendants. Livraison en 14 jours.
           </p>
@@ -47,7 +47,7 @@ export default function Hero() {
             >
               N
             </span>
-            <span className="absolute bottom-6 left-6 text-[11px] font-medium uppercase tracking-[0.24em] text-muted">
+            <span className="absolute bottom-6 left-6 text-[14px] font-medium uppercase tracking-[0.24em] text-muted">
               Studio de design — Est. 2026
             </span>
           </div>

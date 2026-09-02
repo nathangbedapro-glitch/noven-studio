@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Logo from "./Logo";
 
 const links = [
@@ -9,6 +9,7 @@ const links = [
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
+  const burgerRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -16,6 +17,19 @@ export default function Nav() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  // Échap referme le menu mobile et rend le focus au bouton.
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+        burgerRef.current?.focus();
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
 
   return (
     <header
@@ -33,25 +47,26 @@ export default function Nav() {
             <a
               key={l.href}
               href={l.href}
-              className="link-underline text-[15px] text-ink/80 transition-colors hover:text-ink"
+              className="link-underline inline-flex min-h-11 items-center text-[16px] text-ink/80 transition-colors hover:text-ink"
             >
               {l.label}
             </a>
           ))}
           <a
             href="#contact"
-            className="rounded-full bg-terracotta px-5 py-2 text-[14px] font-medium text-paper transition-all duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:bg-terracotta-hover active:scale-[0.97]"
+            className="inline-flex min-h-11 items-center rounded-full bg-terracotta px-5 py-2 text-[14px] font-medium text-paper transition-all duration-200 ease-[cubic-bezier(0.22,1,0.36,1)] hover:bg-terracotta-hover active:scale-[0.97]"
           >
             Contact
           </a>
         </nav>
 
         <button
+          ref={burgerRef}
           type="button"
           aria-label={open ? "Fermer le menu" : "Ouvrir le menu"}
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
-          className="flex h-10 w-10 flex-col items-center justify-center gap-[5px] md:hidden"
+          className="-mr-2 flex h-11 w-11 flex-col items-center justify-center gap-[5px] md:hidden"
         >
           <span
             className={`h-[1.5px] w-6 bg-ink transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] ${open ? "translate-y-[6.5px] rotate-45" : ""}`}

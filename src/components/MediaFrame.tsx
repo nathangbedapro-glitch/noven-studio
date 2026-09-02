@@ -24,7 +24,7 @@ const ratios = {
 
 const borders = {
   hairline: "border border-hairline",
-  accent: "border-2 border-terracotta/70",
+  accent: "border-2 border-terracotta",
 };
 
 /**
@@ -39,7 +39,7 @@ export default function MediaFrame({
   border = "hairline",
   className = "",
   mediaClassName = "",
-  labelClassName = "text-[15px]",
+  labelClassName = "text-[16px]",
 }: Props) {
   return (
     <div
