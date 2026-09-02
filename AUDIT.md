@@ -116,6 +116,8 @@ Valeurs retenues : `--terracotta` `#c4785a` → **`#a85b3d`**, `--terracotta-hov
 | # | Constat | Correction | Fichier |
 |---|---|---|---|
 | 30 | ✅ Soulignement des liens décroché du texte (nav, footer, « Envoyer un email ») | `.link-underline::after` était ancré en `bottom: -2px`, soit au bas de la boîte. Le `min-h-11` posé au lot 5 pour la cible tactile a porté cette boîte à 44px : le trait se retrouvait **23px sous le texte**. Ancré désormais au texte — `top: 50%; margin-top: calc(0.5em + 2px)` — donc indépendant de la hauteur de cible | `index.css:267` |
+| 31 | ✅ Texte de nav 10,5px au-dessus du centre du bouton Contact | **La cause n'était pas le `line-height`** mais ma propre règle `.link-underline { display: inline-block }`, non layerée : elle écrasait l'utilitaire `inline-flex` sur les liens portant `min-h-11`, neutralisant `items-center`. Le texte restait donc collé en haut d'une boîte de 44px. Règle déplacée dans `@layer components`, où les utilitaires gardent la main. Vérifié : écart **0,0px** | `index.css:263` |
+| 32 | ✅ « — STUDIO — » débordant à droite sous « Noven » | Le passage de 9 à 11px au lot 3 a élargi le sous-titre de 73 à 90px, interlettrage compris puisqu'il est exprimé en `em`. Les deux lignes étant calées à gauche dans un conteneur dimensionné par la plus large, le sous-titre débordait. Centrage explicite par `items-center`, plus une marge droite négative de `0.28em` qui retire l'interlettrage fantôme suivant le dernier glyphe. Vérifié : décentrage optique **~0,1px** | `Logo.tsx:5` |
 
 > **L'hypothèse initiale visait le `line-height: 1.5`.** L'isolement des deux
 > variables l'a écartée : retirer le `line-height` laissait l'écart à 24px,

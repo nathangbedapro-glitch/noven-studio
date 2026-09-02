@@ -271,9 +271,17 @@ body {
 }
 
 /* Terracotta underline that draws left -> right on hover */
-.link-underline {
-  position: relative;
-  display: inline-block;
+/*
+ * Dans @layer components pour que les utilitaires Tailwind gardent la main :
+ * non layerée, cette règle écrasait `inline-flex` sur les liens portant un
+ * min-height de 44px, neutralisant `items-center` — le texte restait collé en
+ * haut de la boîte, 10,5px au-dessus du centre du bouton Contact.
+ */
+@layer components {
+  .link-underline {
+    position: relative;
+    display: inline-block;
+  }
 }
 .link-underline::after {
   content: '';
