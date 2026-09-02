@@ -6,7 +6,7 @@ export default function Manifesto() {
 
   return (
     <section id="approche" className="px-6 py-28 md:px-10 md:py-40">
-      <div ref={ref} className="reveal mx-auto max-w-[720px]">
+      <div ref={ref} className="reveal mx-auto max-w-[860px]">
         <Eyebrow>Notre approche</Eyebrow>
         <p className="mt-8 font-serif text-[clamp(1.5rem,3.2vw,2rem)] font-normal italic leading-[1.35] text-ink">
           Un site internet devrait refléter la qualité de votre pratique. Pas

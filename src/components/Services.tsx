@@ -41,7 +41,7 @@ export default function Services() {
 
             <ul className="mt-9 space-y-3.5">
               {packFeatures.map((f) => (
-                <li key={f} className="flex items-start gap-3 text-[15px] leading-snug">
+                <li key={f} className="flex items-start gap-3 text-[16px] leading-snug">
                   <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-terracotta" />
                   <span>{f}</span>
                 </li>
@@ -67,7 +67,7 @@ export default function Services() {
                     +500&nbsp;€
                   </span>
                 </div>
-                <p className="mt-2 text-[15px] leading-relaxed text-muted">
+                <p className="mt-2 text-[16px] leading-relaxed text-muted">
                   Recherche mots-clés, Schema.org, 3 articles SEO rédigés.
                 </p>
               </div>
@@ -78,13 +78,13 @@ export default function Services() {
                     Maintenance mensuelle
                   </h4>
                   <span className="font-serif text-[1.4rem] text-terracotta">
-                    120&nbsp;€<span className="text-[15px]">/mois</span>
+                    120&nbsp;€<span className="text-[16px]">/mois</span>
                   </span>
                 </div>
-                <p className="mt-2 text-[15px] leading-relaxed text-muted">
+                <p className="mt-2 text-[16px] leading-relaxed text-muted">
                   Modifications, support 48h, 1 section par trimestre.
                 </p>
-                <p className="mt-2 text-[13px] italic text-muted/80">
+                <p className="mt-2 text-[14px] italic text-muted">
                   Contrat séparé, souscription optionnelle.
                 </p>
               </div>

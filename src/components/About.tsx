@@ -45,7 +45,7 @@ export default function About() {
           <h2 className="mt-5 font-serif text-[clamp(2.5rem,5vw,3.5rem)] font-medium leading-[1.02] tracking-[-0.01em]">
             Nathan GBEDA
           </h2>
-          <p className="mt-7 max-w-[46ch] text-[15px] leading-relaxed text-muted md:text-[16px]">
+          <p className="mt-7 max-w-[62ch] text-[16px] leading-relaxed text-muted md:text-[16px]">
             Trois années à concevoir des produits digitaux pour des
             marketplaces, des SaaS et des marques établies (Orange, BoursoBank,
             Carrefour) m'ont appris qu'un bon design se voit rarement — il se
@@ -53,13 +53,13 @@ export default function About() {
             avec Noven Studio.
           </p>
 
-          <div className="mt-8 flex items-center gap-5">
+          <div className="-ml-3 mt-8 flex items-center gap-2">
             <a
               href="https://www.linkedin.com/in/nathangbeda/"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="LinkedIn"
-              className="text-ink/70 transition-colors hover:text-terracotta"
+              className="flex h-11 w-11 items-center justify-center text-ink/70 transition-colors hover:text-terracotta"
             >
               <LinkedInIcon />
             </a>
@@ -68,7 +68,7 @@ export default function About() {
             <a
               href="mailto:nathangbedapro@gmail.com"
               aria-label="Email"
-              className="text-ink/70 transition-colors hover:text-terracotta"
+              className="flex h-11 w-11 items-center justify-center text-ink/70 transition-colors hover:text-terracotta"
             >
               <MailIcon />
             </a>

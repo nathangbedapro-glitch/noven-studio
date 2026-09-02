@@ -32,7 +32,7 @@ function Section({
   return (
     <section id={id} className="scroll-mt-28 border-t border-hairline pt-14">
       <SectionHeading eyebrow={number} title={title} />
-      <div className="mt-8 space-y-6 text-[15px] leading-relaxed text-muted">
+      <div className="mt-8 space-y-6 text-[16px] leading-relaxed text-muted">
         {children}
       </div>
     </section>
@@ -77,7 +77,7 @@ export default function Legal() {
 
   return (
     <article className="px-6 pt-32 pb-24 md:px-10 md:pt-40 md:pb-32">
-      <div className="mx-auto max-w-[760px]">
+      <div className="mx-auto max-w-[620px]">
         <div ref={ref} className="reveal">
           <a
             href="#top"
@@ -99,7 +99,7 @@ export default function Legal() {
                 <li key={s.id}>
                   <a
                     href={`#${s.id}`}
-                    className="link-underline text-[15px] text-ink/80 transition-colors hover:text-ink"
+                    className="link-underline text-[16px] text-ink/80 transition-colors hover:text-ink"
                   >
                     <span className="text-terracotta">{s.number}</span> —{" "}
                     {s.title}
@@ -180,7 +180,26 @@ export default function Legal() {
               Acompte de 50&nbsp;% à la signature. Solde de 50&nbsp;% à la
               livraison, payable sous 7 jours. Pénalités de retard : 3 fois le
               taux d'intérêt légal en vigueur, applicables dès le premier jour de
-              retard.
+              retard. À ces pénalités s'ajoute, de plein droit, une indemnité
+              forfaitaire pour frais de recouvrement de 40&nbsp;€ par facture
+              impayée (art. L441-10 du Code de commerce). Lorsque les frais de
+              recouvrement exposés sont supérieurs à ce montant forfaitaire, une
+              indemnisation complémentaire peut être demandée sur justificatifs.
+            </Row>
+            <Row label="Droit de rétractation">
+              Les prestations de Noven Studio s'adressent à des professionnels
+              agissant dans le cadre de leur activité. Conformément à l'article
+              L221-3 du Code de la consommation, le droit de rétractation ne
+              s'applique pas aux contrats conclus entre professionnels dès lors
+              que l'objet du contrat entre dans le champ de l'activité principale
+              du Client et que celui-ci emploie au moins cinq salariés. En dehors
+              de ce cas, le Client professionnel assimilé à un consommateur
+              dispose d'un délai de quatorze jours à compter de la conclusion du
+              contrat pour se rétracter, par courrier ou par email aux
+              coordonnées de la section Contact. Le Client qui demande
+              expressément l'exécution de la prestation avant l'expiration de ce
+              délai reste redevable du montant correspondant au travail déjà
+              accompli.
             </Row>
             <Row label="Propriété intellectuelle et cession">
               À compter du règlement intégral, le Client devient propriétaire des
@@ -243,13 +262,29 @@ export default function Legal() {
             </Row>
             <Row label="Données collectées">
               À ce jour, ce site ne comporte aucun formulaire de collecte de
-              données ni outil de mesure d'audience. Les seules données
-              techniques traitées sont celles inhérentes à l'hébergement
-              (journaux serveur Vercel), à des fins de sécurité. Si vous nous
-              contactez par email ou par prise de rendez-vous, les informations
-              transmises (nom, email, message) sont utilisées uniquement pour
-              répondre à votre demande et ne sont ni conservées au-delà du
-              traitement de l'échange, ni cédées à des tiers.
+              données ni outil de mesure d'audience. Les polices de caractères
+              sont hébergées sur nos propres serveurs : aucune requête vers un
+              service tiers n'est émise lors du chargement des pages, et aucun
+              tiers ne reçoit donc votre adresse IP à cette occasion. Si vous
+              nous contactez par email, les informations transmises (nom, email,
+              message) sont utilisées uniquement pour répondre à votre demande et
+              ne sont ni conservées au-delà du traitement de l'échange, ni cédées
+              à des tiers.
+            </Row>
+            <Row label="Hébergement et transfert hors UE">
+              Le site est hébergé par Vercel Inc., société établie aux
+              États-Unis. À ce titre, les journaux techniques du serveur (adresse
+              IP, horodatage, page demandée), conservés à des fins de sécurité et
+              de fonctionnement, font l'objet d'un transfert hors de l'Union
+              européenne, encadré par les clauses contractuelles types de la
+              Commission européenne.
+            </Row>
+            <Row label="Prise de rendez-vous">
+              Le bouton de prise de rendez-vous est un lien sortant vers Cal.com,
+              qui n'est ni intégré ni chargé dans nos pages : aucune donnée ne
+              lui est transmise tant que vous ne cliquez pas. Une fois sur son
+              site, les données que vous y saisissez relèvent de la politique de
+              confidentialité de Cal.com, responsable de traitement distinct.
             </Row>
             <Row label="Vos droits">
               Conformément au RGPD, vous disposez d'un droit d'accès, de

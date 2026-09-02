@@ -7,7 +7,7 @@ import type { Project } from "../data/projects";
 function MetaRow({ p }: { p: Project }) {
   const items = [p.year, p.role, p.industry];
   return (
-    <div className="mt-7 flex flex-wrap items-center gap-x-4 gap-y-2 text-[12px] font-medium uppercase tracking-[0.14em] text-muted">
+    <div className="mt-7 flex flex-wrap items-center gap-x-4 gap-y-2 text-[14px] font-medium uppercase tracking-[0.14em] text-muted">
       {items.map((item, i) => (
         <span key={item} className="flex items-center gap-4">
           {i > 0 && <span className="h-3 w-px bg-hairline" aria-hidden="true" />}
@@ -59,7 +59,7 @@ export default function ProjectDetail({ project: p }: { project: Project }) {
         {/* Section C — Le défi */}
         <section className="px-6 pb-16 md:px-10 md:pb-24">
           <div className="mx-auto max-w-[720px]">
-            <Eyebrow>Le défi</Eyebrow>
+            <Eyebrow as="h2">Le défi</Eyebrow>
             <p className="mt-6 font-serif text-[clamp(1.375rem,3vw,1.5rem)] font-normal italic leading-[1.4] text-ink">
               {p.challenge}
             </p>
@@ -69,7 +69,7 @@ export default function ProjectDetail({ project: p }: { project: Project }) {
         {/* Section D — La solution */}
         <section className="px-6 pb-16 md:px-10 md:pb-24">
           <div className="mx-auto max-w-[720px]">
-            <Eyebrow>La solution</Eyebrow>
+            <Eyebrow as="h2">La solution</Eyebrow>
             <p className="mt-6 text-[16px] leading-relaxed text-ink/85">
               {p.solution}
             </p>
@@ -78,7 +78,7 @@ export default function ProjectDetail({ project: p }: { project: Project }) {
                 {p.solutionBullets.map((b) => (
                   <li
                     key={b}
-                    className="flex items-start gap-3 text-[15px] leading-snug text-ink/85"
+                    className="flex items-start gap-3 text-[16px] leading-snug text-ink/85"
                   >
                     <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-terracotta" />
                     <span>{b}</span>
@@ -92,7 +92,7 @@ export default function ProjectDetail({ project: p }: { project: Project }) {
         {/* Section E — L'impact */}
         <section className="px-6 pb-24 md:px-10 md:pb-32">
           <div className="mx-auto max-w-[720px]">
-            <Eyebrow>L'impact</Eyebrow>
+            <Eyebrow as="h2">L'impact</Eyebrow>
             {p.impactStats ? (
               <>
                 <div className="mt-8 flex flex-wrap gap-x-16 gap-y-8">

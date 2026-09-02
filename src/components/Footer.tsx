@@ -24,14 +24,14 @@ export default function Footer() {
           </p>
         </div>
 
-        <nav className="flex flex-col gap-3 md:items-center md:justify-start">
+        <nav className="flex flex-col md:items-center md:justify-start">
           {legalLinks.map((l) => (
             <a
               key={l.label}
               href={l.href}
               target={l.external ? "_blank" : undefined}
               rel={l.external ? "noopener noreferrer" : undefined}
-              className="link-underline w-fit text-[15px] text-ink/75 transition-colors hover:text-ink"
+              className="link-underline inline-flex min-h-11 w-fit items-center text-[16px] text-ink/75 transition-colors hover:text-ink"
             >
               {l.label}
             </a>
@@ -41,11 +41,11 @@ export default function Footer() {
         <div className="flex flex-col gap-2 md:items-end md:text-right">
           <a
             href="mailto:novenstudio.design@gmail.com"
-            className="link-underline w-fit text-[15px] text-ink/75 hover:text-ink md:self-end"
+            className="link-underline inline-flex min-h-11 w-fit items-center text-[16px] text-ink/75 hover:text-ink md:self-end"
           >
             novenstudio.design@gmail.com
           </a>
-          <p className="text-[13px] text-muted">
+          <p className="text-[14px] text-muted">
             © 2026 Noven Studio — Fait à Paris
           </p>
         </div>

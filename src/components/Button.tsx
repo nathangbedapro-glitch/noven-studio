@@ -19,7 +19,9 @@ export default function Button({
   className = "",
 }: Props) {
   const base =
-    "inline-flex items-center justify-center rounded-full px-7 py-3 text-[15px] font-medium transition-all duration-200 ease-out active:scale-[0.97] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-terracotta";
+    // Pas d'utilitaire focus-visible ici : ils neutralisaient la règle globale
+    // d'index.css et laissaient l'anneau par défaut du navigateur s'afficher.
+    "inline-flex items-center justify-center rounded-full px-7 py-3 text-[16px] font-medium transition-all duration-200 ease-out active:scale-[0.97]";
 
   const variants = {
     primary:
