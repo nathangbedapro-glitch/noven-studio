@@ -1,11 +1,16 @@
 import Logo from "./Logo";
 
-const legalLinks = [
+// `external` est porté par l'entrée plutôt que par le rendu : les deux
+// premiers liens sont des ancres internes et ne doivent pas s'ouvrir dans un
+// nouvel onglet.
+const legalLinks: { label: string; href: string; external?: boolean }[] = [
   { label: "Mentions légales", href: "#legal-01" },
   { label: "Politique de confidentialité", href: "#legal-04" },
-  // TODO: placeholder from the prototype — point this at the real Noven Studio
-  // LinkedIn page before going live.
-  { label: "LinkedIn", href: "https://www.linkedin.com" },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/nathangbeda/",
+    external: true,
+  },
 ];
 
 export default function Footer() {
@@ -24,6 +29,8 @@ export default function Footer() {
             <a
               key={l.label}
               href={l.href}
+              target={l.external ? "_blank" : undefined}
+              rel={l.external ? "noopener noreferrer" : undefined}
               className="link-underline w-fit text-[15px] text-ink/75 transition-colors hover:text-ink"
             >
               {l.label}
