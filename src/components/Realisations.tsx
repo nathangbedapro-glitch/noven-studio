@@ -16,8 +16,13 @@ function ProjectCard({ p }: { p: Project }) {
           mediaClassName="transition-transform duration-500 ease-out group-hover:scale-[1.03]"
         />
         {/* Terracotta overlay on hover */}
-        <div className="absolute inset-0 flex items-center justify-center bg-terracotta/0 opacity-0 transition-all duration-300 group-hover:bg-terracotta/85 group-hover:opacity-100">
-          <span className="text-[15px] font-medium tracking-wide text-paper">
+        <div className="absolute inset-0 flex items-center justify-center bg-terracotta/0 opacity-0 transition-all duration-300 group-hover:bg-terracotta/60 group-hover:opacity-100">
+          {/*
+            Le voile à 60 % laisse passer l'image, ce qui fait tomber le
+            contraste du libellé à ~1,9:1 sur un visuel clair. L'ombre portée
+            lui redonne un bord sombre sans assombrir le voile.
+          */}
+          <span className="text-[15px] font-medium tracking-wide text-paper [text-shadow:0_1px_3px_rgba(26,26,26,0.6)]">
             Voir le projet →
           </span>
         </div>
