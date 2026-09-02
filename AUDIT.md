@@ -95,7 +95,7 @@ Valeurs retenues : `--terracotta` `#c4785a` → **`#a85b3d`**, `--terracotta-hov
 | # | Constat | Correction | Fichier |
 |---|---|---|---|
 | 18 | ✅ Corps sous 16px | Corps porté à **16px**, plancher à **14px** (11/12/13px relevés). 26 occurrences en 16px, 15 en 14px | tous les composants |
-| 19 | ✅ Interlignage ≈ 1,2 | `line-height: 1.5` sur `body` | `index.css:194` |
+| 19 | ⚠️ **Constat erroné, corrigé** — l'interlignage n'était pas de 1,2 : le preflight de Tailwind v4 pose déjà `line-height: 1.5` sur `html`, ma règle sur `body` était redondante. Portée désormais limitée à `p, li` dans `@layer base`, par cohérence d'intention plutôt que par nécessité | `index.css:215` |
 | 20 | ✅ Lignes trop courtes | `46ch`→`62ch`, `42ch`→`60ch`, `30rem`→`36rem` | `About.tsx`, `Realisations.tsx`, `Hero.tsx` |
 | 21 | ✅ Page légale ≈ 95–100 caractères | `max-w-[760px]` → **`620px`** | `Legal.tsx:80` |
 | 22 | ✅ Cormorant italique 15px en `--muted` | Passe à 16px, et le `--muted` corrigé donne 5,18:1. Reste dormant (les 5 projets ont une image) | `MediaFrame.tsx:55` |
@@ -109,6 +109,20 @@ Valeurs retenues : `--terracotta` `#c4785a` → **`#a85b3d`**, `--terracotta-hov
 | 27 | ✅ Auto-pollution du CSS par les `.md` | `@source not '../**/*.md'` ajouté. Vérifié : la règle `.ease-[cubic-bezier(...)]` a disparu du bundle, la vraie subsiste. **Couvre aussi `src/imports/pasted_text/`**, qui polluait de la même façon | `index.css:8` |
 
 ---
+
+
+### Régression détectée sur la preview, corrigée
+
+| # | Constat | Correction | Fichier |
+|---|---|---|---|
+| 30 | ✅ Soulignement des liens décroché du texte (nav, footer, « Envoyer un email ») | `.link-underline::after` était ancré en `bottom: -2px`, soit au bas de la boîte. Le `min-h-11` posé au lot 5 pour la cible tactile a porté cette boîte à 44px : le trait se retrouvait **23px sous le texte**. Ancré désormais au texte — `top: 50%; margin-top: calc(0.5em + 2px)` — donc indépendant de la hauteur de cible | `index.css:267` |
+
+> **L'hypothèse initiale visait le `line-height: 1.5`.** L'isolement des deux
+> variables l'a écartée : retirer le `line-height` laissait l'écart à 24px,
+> retirer le `min-h-11` le ramenait à 3px. La cause était la cible tactile, pas
+> l'interlignage. L'alignement vertical de la nav, lui, n'a jamais été rompu :
+> les centres du lien et du bouton Contact coïncident dans les quatre variantes
+> testées. C'est le trait décroché qui donnait cette impression.
 
 ## 2. Constats en attente
 

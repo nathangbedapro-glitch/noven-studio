@@ -198,7 +198,6 @@ body {
   background-color: var(--color-paper);
   color: var(--color-ink);
   font-family: var(--font-sans);
-  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -206,6 +205,18 @@ body {
 ::selection {
   background-color: rgba(196, 120, 90, 0.18);
   color: var(--color-ink);
+}
+
+/*
+ * Interlignage de lecture (AUDIT #19), limité aux blocs de texte réels :
+ * ni la navigation, ni les boutons, ni le footer. Dans  base pour que
+ * les utilitaires Tailwind (leading-relaxed, leading-snug) gardent la main.
+ */
+@layer base {
+  p,
+  li {
+    line-height: 1.5;
+  }
 }
 
 /* Hide scrollbars until scrolling (soft approximation: thin, muted) */
@@ -268,7 +279,15 @@ body {
   content: '';
   position: absolute;
   left: 0;
-  bottom: -2px;
+  /*
+   * Ancré au texte, pas au bas de la boîte : les liens de nav, de footer et de
+   * contact portent un min-height de 44px pour la cible tactile (AUDIT #17), et
+   * un `bottom: -2px` plaçait le trait 23px sous le texte. Le texte étant centré
+   * verticalement, la moitié du cadratin plus 2px le ramène juste sous les
+   * jambages, quelle que soit la hauteur de la boîte.
+   */
+  top: 50%;
+  margin-top: calc(0.5em + 2px);
   height: 1px;
   width: 100%;
   background-color: var(--color-terracotta);
