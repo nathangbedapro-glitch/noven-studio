@@ -50,10 +50,18 @@ function Gallery({ images }: { images: GalleryImage[] }) {
               {/*
                 Un vrai <button> plutôt qu'une image cliquable : Entrée et
                 Espace fonctionnent sans code, et le rôle est annoncé.
+
+                Le focus explicite couvre Safari macOS, qui ne focalise pas
+                les <button> au clic souris : sans lui, la visionneuse
+                mémoriserait <body> comme déclencheur et rendrait le focus
+                au corps du document plutôt qu'à cette miniature.
               */}
               <button
                 type="button"
-                onClick={() => setAgrandie(i)}
+                onClick={(e) => {
+                  e.currentTarget.focus();
+                  setAgrandie(i);
+                }}
                 aria-label={`Agrandir l'image ${i + 1} sur ${images.length}`}
                 className="group block w-full cursor-pointer overflow-hidden rounded-[3px]"
               >

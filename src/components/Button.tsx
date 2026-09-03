@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { MouseEvent, ReactNode } from "react";
 
 type Props = {
   children: ReactNode;
@@ -8,7 +8,7 @@ type Props = {
   /** Opens in a new tab. Sets `rel` itself so `noopener` is never forgotten. */
   external?: boolean;
   /** Rend un vrai <button> au lieu d'un lien : pour une action, pas une navigation. */
-  onClick?: () => void;
+  onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
   type?: "button" | "submit";
   disabled?: boolean;
   className?: string;
