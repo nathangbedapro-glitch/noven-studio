@@ -51,6 +51,7 @@ export default function QuoteModal({
 }) {
   const titreId = useId();
   const panelRef = useRef<HTMLDivElement>(null);
+  const titreRef = useRef<HTMLHeadingElement>(null);
   const declencheurRef = useRef<Element | null>(null);
 
   const [status, setStatus] = useState<Status>("idle");
@@ -75,7 +76,13 @@ export default function QuoteModal({
     };
   }, [open]);
 
-  // Échap ferme, et Tab reste piégé dans la modale.
+  // Le dialogue est déjà ouvert quand le titre passe à la confirmation : sans
+  // déplacer le focus, le lecteur d'écran ne réannoncerait rien. Le titre est
+  // focusable (tabIndex -1) uniquement pour cela, il reste hors tabulation.
+  useEffect(() => {
+    if (status === "sent") titreRef.current?.focus();
+  }, [status]);
+
   useEffect(() => {
     if (!open) return;
     const onKey = (e: KeyboardEvent) => {
@@ -172,11 +179,25 @@ export default function QuoteModal({
         className="modal-panel max-h-[92vh] w-full overflow-y-auto rounded-t-[12px] bg-paper px-6 pb-8 pt-6 sm:max-w-[540px] sm:rounded-[3px] sm:px-10 sm:pb-10 sm:pt-8"
       >
         <div className="flex items-start justify-between gap-4">
+          {/*
+            Même id dans les deux états : `aria-labelledby` suit donc le titre
+            courant sans rien à changer. La coche est décorative — le texte dit
+            déjà le succès — donc masquée aux lecteurs d'écran pour que le nom
+            accessible reste « Demande bien reçue ».
+          */}
           <h2
             id={titreId}
+            ref={titreRef}
+            tabIndex={-1}
             className="font-serif text-[clamp(1.75rem,5vw,2.25rem)] font-medium leading-tight tracking-[-0.01em]"
           >
-            Demander un devis
+            {status === "sent" ? (
+              <>
+                Demande bien reçue <span aria-hidden="true">✅</span>
+              </>
+            ) : (
+              "Demander un devis"
+            )}
           </h2>
           <button
             type="button"
