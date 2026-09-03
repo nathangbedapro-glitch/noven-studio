@@ -2,7 +2,7 @@ import Eyebrow from "./Eyebrow";
 import Contact from "./Contact";
 import MediaFrame from "./MediaFrame";
 import { useReveal } from "../hooks/useReveal";
-import type { Project } from "../data/projects";
+import type { GalleryImage, Project } from "../data/projects";
 
 function MetaRow({ p }: { p: Project }) {
   const items = [p.year, p.role, p.industry];
@@ -18,8 +18,49 @@ function MetaRow({ p }: { p: Project }) {
   );
 }
 
+/**
+ * Grille de visuels complémentaires. Le nombre de colonnes suit le nombre
+ * d'images pour ne jamais laisser de trou en fin de ligne : 3 colonnes quand le
+ * total est un multiple de 3, 2 colonnes sinon — et dans ce dernier cas, une
+ * image orpheline en fin de grille prend toute la largeur.
+ */
+function Gallery({ images }: { images: GalleryImage[] }) {
+  const colonnes =
+    images.length % 3 === 0 ? "sm:grid-cols-3" : "sm:grid-cols-2";
+  const orpheline = images.length % 3 !== 0 && images.length % 2 === 1;
+
+  return (
+    <section className="px-6 pb-24 md:px-10 md:pb-32">
+      <div className="mx-auto max-w-[1000px]">
+        <Eyebrow as="h2">Galerie</Eyebrow>
+        {/* Le reset Tailwind retire la sémantique de liste dans Safari : role la rétablit. */}
+        <ul role="list" className={`mt-8 grid grid-cols-1 gap-6 ${colonnes}`}>
+          {images.map((img, i) => (
+            <li
+              key={img.src}
+              className={
+                orpheline && i === images.length - 1 ? "sm:col-span-2" : ""
+              }
+            >
+              {/* Toujours sous la ligne de flottaison au chargement de la page. */}
+              <MediaFrame
+                src={img.src}
+                alt={img.alt}
+                ratio="4/3"
+                loading="lazy"
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
 export default function ProjectDetail({ project: p }: { project: Project }) {
   const ref = useReveal<HTMLDivElement>();
+  // Un tableau vide compte comme absent : pas de section sans contenu.
+  const galerie = p.gallery?.length ? p.gallery : null;
 
   return (
     <article>
@@ -90,7 +131,11 @@ export default function ProjectDetail({ project: p }: { project: Project }) {
         </section>
 
         {/* Section E — L'impact */}
-        <section className="px-6 pb-24 md:px-10 md:pb-32">
+        <section
+          className={`px-6 md:px-10 ${
+            galerie ? "pb-16 md:pb-24" : "pb-24 md:pb-32"
+          }`}
+        >
           <div className="mx-auto max-w-[720px]">
             <Eyebrow as="h2">L'impact</Eyebrow>
             {p.impactStats ? (
@@ -118,9 +163,12 @@ export default function ProjectDetail({ project: p }: { project: Project }) {
             )}
           </div>
         </section>
+
+        {/* Section F — Galerie (absente quand le projet n'a pas de visuels) */}
+        {galerie && <Gallery images={galerie} />}
       </div>
 
-      {/* Section F — CTA (reused Contact) */}
+      {/* Section G — CTA (reused Contact) */}
       <Contact />
     </article>
   );

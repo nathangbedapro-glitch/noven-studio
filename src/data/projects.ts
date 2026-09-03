@@ -3,8 +3,17 @@ import alvoVisual from "../assets/images/alvo-visual.png";
 import carrefourVisual from "../assets/images/carrefour-visual.png";
 import michelFerrandVisual from "../assets/images/michel-ferrand-visual.png";
 import petcareVisual from "../assets/images/petcare-visual.png";
+import carrefourGallery1 from "../assets/images/carrefour-gallery-1.jpg";
+import carrefourGallery2 from "../assets/images/carrefour-gallery-2.jpg";
+import carrefourGallery3 from "../assets/images/carrefour-gallery-3.jpg";
 
 export type Stat = { value: string; label: string };
+
+/**
+ * Une image de galerie porte son propre alt : un simple tableau d'URLs ne
+ * laisserait nulle part où écrire une description propre à chaque visuel.
+ */
+export type GalleryImage = { src: string; alt: string };
 
 export type Project = {
   slug: string;
@@ -22,6 +31,8 @@ export type Project = {
   solutionBullets?: string[];
   impact: string;
   impactStats?: Stat[];
+  /** Visuels complémentaires. Absente ou vide, la section Galerie ne s'affiche pas. */
+  gallery?: GalleryImage[];
 };
 
 export const projects: Project[] = [
@@ -123,6 +134,20 @@ export const projects: Project[] = [
       "Forte participation dès les premières semaines et un renforcement de la cohésion interne du groupe.",
     impactStats: [
       { value: "100 000", label: "collaborateurs fédérés" },
+    ],
+    gallery: [
+      {
+        src: carrefourGallery1,
+        alt: "Maquette tablette de la page d'accueil du Grand Tournoi : le titre en capitales blanches sur un dégradé orange et rose, six collaborateurs en tenue de sport dont une joueuse en fauteuil roulant, un compte à rebours avant le début du tournoi et une alerte « délégation en cours de constitution ».",
+      },
+      {
+        src: carrefourGallery2,
+        alt: "Maquette tablette de la page Actualités : un fil de publications de collaborateurs avec photos, likes et commentaires, un bouton « Partager des souvenirs » et une carte de quizz à trois réponses posée par-dessus.",
+      },
+      {
+        src: carrefourGallery3,
+        alt: "Deux maquettes mobiles côte à côte : l'écran d'accueil invitant magasins, entrepôts et sièges à rejoindre le tournoi, et l'écran « Ma délégation » avec classement sportif, points supporters et conditions restantes à remplir.",
+      },
     ],
   },
   {
