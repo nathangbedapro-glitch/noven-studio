@@ -261,7 +261,7 @@ export default function Legal() {
               .
             </Row>
             <Row label="Données collectées">
-              Ce site ne comporte aucun formulaire de collecte de données. Les
+              Aucune donnée n'est collectée à la simple consultation du site. Les
               polices de caractères sont hébergées sur nos propres serveurs, et
               le script de mesure d'audience est servi depuis notre propre nom de
               domaine : aucune requête vers un domaine tiers n'est émise lors du
@@ -269,6 +269,18 @@ export default function Legal() {
               informations transmises (nom, email, message) sont utilisées
               uniquement pour répondre à votre demande et ne sont ni conservées
               au-delà du traitement de l'échange, ni cédées à des tiers.
+            </Row>
+            <Row label="Formulaire de demande de devis">
+              Le formulaire « Demander un devis » recueille votre nom, votre
+              adresse email, votre profession ou secteur d'activité, et la
+              description de votre besoin. Ces informations servent uniquement à
+              établir et vous transmettre une proposition, à l'exclusion de toute
+              prospection non sollicitée. La base légale est l'exécution de
+              mesures précontractuelles prises à votre demande. Le formulaire est
+              acheminé par Web3Forms, sous-traitant qui relaie le message vers
+              notre boîte email sans le conserver durablement ; aucune donnée
+              n'est stockée sur ce site. Les demandes restées sans suite sont
+              effacées au plus tard trois ans après le dernier contact.
             </Row>
             <Row label="Mesure d'audience">
               Ce site utilise Vercel Web Analytics, fourni par Vercel Inc.,

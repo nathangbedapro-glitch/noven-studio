@@ -1,5 +1,7 @@
+import { useState } from "react";
 import Button from "./Button";
 import Eyebrow from "./Eyebrow";
+import QuoteModal, { BROUILLON_VIDE } from "./QuoteModal";
 import { useReveal } from "../hooks/useReveal";
 
 const packFeatures = [
@@ -15,8 +17,12 @@ const packFeatures = [
 
 export default function Services() {
   const ref = useReveal<HTMLDivElement>();
+  const [devisOuvert, setDevisOuvert] = useState(false);
+  // Le brouillon vit ici pour survivre à la fermeture de la modale.
+  const [brouillon, setBrouillon] = useState(BROUILLON_VIDE);
 
   return (
+    <>
     <section className="px-6 py-24 md:px-10 md:py-32">
       <div ref={ref} className="reveal mx-auto max-w-[1200px]">
         <Eyebrow>L'offre</Eyebrow>
@@ -49,7 +55,9 @@ export default function Services() {
             </ul>
 
             <div className="mt-10 pt-2">
-              <Button href="#contact">Demander un devis</Button>
+              <Button onClick={() => setDevisOuvert(true)}>
+                Demander un devis
+              </Button>
             </div>
           </article>
 
@@ -92,6 +100,15 @@ export default function Services() {
           </article>
         </div>
       </div>
-    </section>
+      </section>
+
+      <QuoteModal
+        open={devisOuvert}
+        onClose={() => setDevisOuvert(false)}
+        brouillon={brouillon}
+        onChange={setBrouillon}
+        onEnvoye={() => setBrouillon(BROUILLON_VIDE)}
+      />
+    </>
   );
 }
