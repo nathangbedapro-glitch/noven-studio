@@ -9,7 +9,8 @@ import type { GalleryImage } from "../data/projects";
  * pleine largeur, hauteur libre, conteneur défilant. Le seuil s'applique au
  * ratio réel lu à l'affichage, jamais à une liste de fichiers codée en dur.
  */
-export const RATIO_DOCUMENT = 0.8;
+export const RATIO_DOCUMENT = 0.95;
+/** Comparaison stricte : une image carrée (ratio 1) reste en mode standard. */
 export const estFormatDocument = (ratio: number) => ratio < RATIO_DOCUMENT;
 
 /** Cible tactile de 44×44 px, fond opaque : lisible quelle que soit l'image dessous. */
@@ -61,11 +62,34 @@ export default function Lightbox({
     if (!img) return;
     setRatio(img.naturalWidth ? img.naturalWidth / img.naturalHeight : null);
   };
+  const modeDocument = ratio !== null && estFormatDocument(ratio);
 
   // Un changement d'image repart en haut du document, comme un nouveau PDF.
   useEffect(() => {
     docRef.current?.scrollTo({ top: 0 });
   }, [index]);
+
+  // Le conteneur ne devient focalisable que s'il déborde vraiment : sur un
+  // écran haut, l'image tient parfois entière et une étape de tabulation de
+  // plus n'aurait alors rien à faire défiler.
+  const [debordement, setDebordement] = useState(false);
+  useEffect(() => {
+    const el = docRef.current;
+    if (!el) {
+      setDebordement(false);
+      return;
+    }
+    const mesurerDebordement = () =>
+      setDebordement(el.scrollHeight > el.clientHeight);
+    mesurerDebordement();
+    // On observe aussi l'image : sa hauteur passe de 0 à sa valeur réelle
+    // quand elle finit de charger, ce qui change le débordement.
+    const observateur = new ResizeObserver(mesurerDebordement);
+    observateur.observe(el);
+    const img = el.querySelector("img");
+    if (img) observateur.observe(img);
+    return () => observateur.disconnect();
+  }, [modeDocument, index]);
 
   // Flèches du clavier, en boucle. Le hook occupe déjà la phase de capture
   // pour Échap et Tab ; celui-ci écoute au bouillonnement.
@@ -85,7 +109,6 @@ export default function Lightbox({
 
   const image = images[index];
   const plusieurs = images.length > 1;
-  const modeDocument = ratio !== null && estFormatDocument(ratio);
   const aller = (pas: number) =>
     onIndexChange((index + pas + images.length) % images.length);
 
@@ -163,9 +186,13 @@ export default function Lightbox({
         {modeDocument ? (
           <div
             ref={docRef}
-            tabIndex={0}
-            role="region"
-            aria-label="Image au format document, défilement vertical"
+            {...(debordement
+              ? {
+                  tabIndex: 0,
+                  role: "region",
+                  "aria-label": "Contenu de l'image, défilable",
+                }
+              : {})}
             className="lightbox-doc"
           >
             <img
