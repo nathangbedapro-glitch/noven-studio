@@ -72,88 +72,91 @@ export default function Lightbox({
   };
 
   return createPortal(
-    // Fond opaque, pas translucide : à 95 % la nav transparaissait derrière,
-    // et le contraste du compteur dépendait de la page rendue dessous.
+    // Fond volontairement pas tout à fait opaque : on devine la page derrière,
+    // et le flou la réduit à une texture plutôt qu'à un contenu lisible qui
+    // distrairait. Le compteur reste à 11,74:1 dessus, mesuré sur --paper, le
+    // fond de page le plus clair du site donc le pire cas.
     <div
-      className="lightbox-overlay fixed inset-0 z-[100] bg-ink p-4 sm:p-6"
+      className="lightbox-overlay fixed inset-0 z-[100] bg-ink/88 p-4 backdrop-blur-[8px] sm:p-6"
       onClick={fermerSiFond}
     >
+      {/*
+        Le panneau est la grille : le placement de chaque enfant vient de
+        `grid-area`, ce qui laisse l'ordre du DOM — et donc la tabulation —
+        identique dans les deux dispositions.
+      */}
       <div
         ref={panelRef}
         role="dialog"
         aria-modal="true"
         aria-labelledby={compteurId}
-        className="mx-auto flex h-full w-full max-w-[1100px] flex-col gap-4"
+        className={`lightbox-grid mx-auto h-full w-full max-w-[1100px] ${
+          plusieurs ? "" : "lightbox-grid--solo"
+        }`}
         onClick={fermerSiFond}
       >
-        <div className="flex shrink-0 items-center justify-between gap-4">
-          {/*
-            Ce compteur sert deux fois : nom accessible du dialogue, donc annoncé
-            à l'ouverture, et région live, donc réannoncé à chaque changement
-            d'image. Une seule source, pas de texte dupliqué pour l'oreille.
-          */}
-          <p
-            id={compteurId}
-            aria-live="polite"
-            aria-atomic="true"
-            className="text-[14px] font-medium uppercase tracking-[0.14em] text-paper"
-          >
-            Image {index + 1} sur {images.length}
-          </p>
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="Fermer la visionneuse"
-            className={`${commande} -mr-2 bg-paper text-ink hover:bg-terracotta hover:text-paper`}
-          >
-            <svg
-              viewBox="0 0 24 24"
-              width="20"
-              height="20"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="1.7"
-              strokeLinecap="round"
-              aria-hidden="true"
-            >
-              <path d="M6 6l12 12M18 6L6 18" />
-            </svg>
-          </button>
-        </div>
-
-        <div
-          className="relative flex min-h-0 flex-1 items-center justify-center"
-          onClick={fermerSiFond}
+        {/*
+          Ce compteur sert deux fois : nom accessible du dialogue, donc annoncé
+          à l'ouverture, et région live, donc réannoncé à chaque changement
+          d'image. Une seule source, pas de texte dupliqué pour l'oreille.
+        */}
+        <p
+          id={compteurId}
+          aria-live="polite"
+          aria-atomic="true"
+          className="lightbox-count text-[14px] font-medium uppercase tracking-[0.14em] text-paper"
         >
-          {/* La `key` relance l'animation d'apparition à chaque changement. */}
-          <img
-            key={image.src}
-            src={image.src}
-            alt={image.alt}
-            className="lightbox-media max-h-full max-w-full rounded-[3px] object-contain"
-          />
+          Image {index + 1} sur {images.length}
+        </p>
 
-          {plusieurs && (
-            <>
-              <button
-                type="button"
-                onClick={() => aller(-1)}
-                aria-label="Image précédente"
-                className={`${commande} absolute left-0 top-1/2 -translate-y-1/2 bg-paper text-ink hover:bg-terracotta hover:text-paper`}
-              >
-                <Chevron vers="gauche" />
-              </button>
-              <button
-                type="button"
-                onClick={() => aller(1)}
-                aria-label="Image suivante"
-                className={`${commande} absolute right-0 top-1/2 -translate-y-1/2 bg-paper text-ink hover:bg-terracotta hover:text-paper`}
-              >
-                <Chevron vers="droite" />
-              </button>
-            </>
-          )}
-        </div>
+        <button
+          type="button"
+          onClick={onClose}
+          aria-label="Fermer la visionneuse"
+          className={`lightbox-close ${commande} bg-paper text-ink hover:bg-terracotta hover:text-paper`}
+        >
+          <svg
+            viewBox="0 0 24 24"
+            width="20"
+            height="20"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="1.7"
+            strokeLinecap="round"
+            aria-hidden="true"
+          >
+            <path d="M6 6l12 12M18 6L6 18" />
+          </svg>
+        </button>
+
+        {/* La `key` relance l'animation d'apparition à chaque changement. */}
+        <img
+          key={image.src}
+          src={image.src}
+          alt={image.alt}
+          className="lightbox-media max-h-full max-w-full rounded-[3px] object-contain"
+        />
+
+        {plusieurs && (
+          <>
+            <button
+              type="button"
+              onClick={() => aller(-1)}
+              aria-label="Image précédente"
+              className={`lightbox-prev ${commande} bg-paper text-ink hover:bg-terracotta hover:text-paper`}
+            >
+              <Chevron vers="gauche" />
+            </button>
+            <button
+              type="button"
+              onClick={() => aller(1)}
+              aria-label="Image suivante"
+              className={`lightbox-next ${commande} bg-paper text-ink hover:bg-terracotta hover:text-paper`}
+            >
+              <Chevron vers="droite" />
+            </button>
+          </>
+        )}
       </div>
     </div>,
     document.body,
