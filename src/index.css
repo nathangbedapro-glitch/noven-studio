@@ -328,3 +328,53 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+/*
+ * Modale de demande de devis. Sur mobile elle remonte depuis le bas (bottom
+ * sheet), sur écran large elle apparaît centrée. Le bloc prefers-reduced-motion
+ * plus haut neutralise ces deux animations.
+ */
+@keyframes modal-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modal-sheet {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes modal-pop {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.modal-overlay {
+  animation: modal-fade var(--noven-duration-nav) var(--noven-ease-out) both;
+}
+
+.modal-panel {
+  animation: modal-sheet 280ms var(--noven-ease-out) both;
+}
+
+@media (min-width: 640px) {
+  .modal-panel {
+    animation-name: modal-pop;
+  }
+}
