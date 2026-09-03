@@ -378,3 +378,39 @@ body {
     animation-name: modal-pop;
   }
 }
+
+/*
+ * Visionneuse plein écran : le fond se fond, l'image apparaît en montant très
+ * légèrement en échelle. La `key` React rejoue `lightbox-media` à chaque
+ * changement d'image. Le bloc prefers-reduced-motion plus haut neutralise les
+ * deux animations d'un coup.
+ */
+@keyframes lightbox-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes lightbox-media {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.lightbox-overlay {
+  animation: lightbox-fade var(--noven-duration-route) var(--noven-ease-out)
+    both;
+}
+
+.lightbox-media {
+  animation: lightbox-media var(--noven-duration-route) var(--noven-ease-out)
+    both;
+}

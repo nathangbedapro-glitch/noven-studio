@@ -1,5 +1,7 @@
+import { useState } from "react";
 import Eyebrow from "./Eyebrow";
 import Contact from "./Contact";
+import Lightbox from "./Lightbox";
 import MediaFrame from "./MediaFrame";
 import { useReveal } from "../hooks/useReveal";
 import type { GalleryImage, Project } from "../data/projects";
@@ -28,6 +30,9 @@ function Gallery({ images }: { images: GalleryImage[] }) {
   const colonnes =
     images.length % 3 === 0 ? "sm:grid-cols-3" : "sm:grid-cols-2";
   const orpheline = images.length % 3 !== 0 && images.length % 2 === 1;
+  // L'index vit ici : la visionneuse peut ainsi rendre le focus à la miniature
+  // exacte qui l'a ouverte, et non au corps du document.
+  const [agrandie, setAgrandie] = useState<number | null>(null);
 
   return (
     <section className="px-6 pb-24 md:px-10 md:pb-32">
@@ -42,17 +47,36 @@ function Gallery({ images }: { images: GalleryImage[] }) {
                 orpheline && i === images.length - 1 ? "sm:col-span-2" : ""
               }
             >
-              {/* Toujours sous la ligne de flottaison au chargement de la page. */}
-              <MediaFrame
-                src={img.src}
-                alt={img.alt}
-                ratio="4/3"
-                loading="lazy"
-              />
+              {/*
+                Un vrai <button> plutôt qu'une image cliquable : Entrée et
+                Espace fonctionnent sans code, et le rôle est annoncé.
+              */}
+              <button
+                type="button"
+                onClick={() => setAgrandie(i)}
+                aria-label={`Agrandir l'image ${i + 1} sur ${images.length}`}
+                className="group block w-full cursor-pointer overflow-hidden rounded-[3px]"
+              >
+                {/* Toujours sous la ligne de flottaison au chargement de la page. */}
+                <MediaFrame
+                  src={img.src}
+                  alt={img.alt}
+                  ratio="4/3"
+                  loading="lazy"
+                  mediaClassName="transition-transform duration-500 ease-out group-hover:scale-[1.03]"
+                />
+              </button>
             </li>
           ))}
         </ul>
       </div>
+
+      <Lightbox
+        images={images}
+        index={agrandie}
+        onIndexChange={setAgrandie}
+        onClose={() => setAgrandie(null)}
+      />
     </section>
   );
 }
