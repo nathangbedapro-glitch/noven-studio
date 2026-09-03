@@ -6,6 +6,15 @@ import petcareVisual from "../assets/images/petcare-visual.png";
 import carrefourGallery1 from "../assets/images/carrefour-gallery-1.jpg";
 import carrefourGallery2 from "../assets/images/carrefour-gallery-2.jpg";
 import carrefourGallery3 from "../assets/images/carrefour-gallery-3.jpg";
+import alvoGallery1 from "../assets/images/alvo-gallery-1.jpg";
+import alvoGallery2 from "../assets/images/alvo-gallery-2.jpg";
+import alvoGallery3 from "../assets/images/alvo-gallery-3.jpg";
+import michelFerrandGallery1 from "../assets/images/michel-ferrand-gallery-1.jpg";
+import michelFerrandGallery2 from "../assets/images/michel-ferrand-gallery-2.jpg";
+import michelFerrandGallery3 from "../assets/images/michel-ferrand-gallery-3.jpg";
+import petcareGallery1 from "../assets/images/petcare-gallery-1.jpg";
+import petcareGallery2 from "../assets/images/petcare-gallery-2.jpg";
+import petcareGallery3 from "../assets/images/petcare-gallery-3.jpg";
 
 export type Stat = { value: string; label: string };
 
@@ -87,6 +96,20 @@ export const projects: Project[] = [
       { value: "+18 %", label: "d'interactions en 3 mois" },
       { value: "1ᵉʳ sprint", label: "adoption du design system" },
     ],
+    gallery: [
+      {
+        src: alvoGallery1,
+        alt: "Interface Alvo de gestion des repreneurs : liste de contacts organisée en colonnes par statut de NDA, avec la modale Modifier les filtres ouverte, permettant de filtrer par accès à la dataroom, par type de repreneur et par statut d'avancement.",
+      },
+      {
+        src: alvoGallery2,
+        alt: "Interface Alvo : la liste de contacts avec, au premier plan, le panneau Modifier le contact ouvert sur une fiche repreneur, ses onglets Informations générales, Informations personnelles, L'opération et NDA, et l'action Créer un NDA.",
+      },
+      {
+        src: alvoGallery3,
+        alt: "Mockup laptop de l'interface Alvo : la liste de contacts en colonnes, avec les repreneurs regroupés par statut de NDA et la sélection multiple active.",
+      },
+    ],
   },
   {
     slug: "michel-ferrand",
@@ -108,6 +131,20 @@ export const projects: Project[] = [
     impactStats: [
       { value: "+60 %", label: "de visibilité organique" },
       { value: "50 %+", label: "des visites sur mobile" },
+    ],
+    gallery: [
+      {
+        src: michelFerrandGallery1,
+        alt: "Mockup desktop du site Michel Ferrand sur fond vert sapin : page Nos projets, page catégorie Meubles compléments avec recherche et filtres, page éditoriale La Maison Michel Ferrand, fiche produit Enfilade Vertigo et articles de blog.",
+      },
+      {
+        src: michelFerrandGallery2,
+        alt: "Trois écrans mobiles du site Michel Ferrand : la page Nos projets, la page éditoriale La Maison Michel Ferrand en plein écran photo, et la page catégorie Meubles compléments avec barre de recherche et fiche produit.",
+      },
+      {
+        src: michelFerrandGallery3,
+        alt: "Composition de deux mobiles et d'un écran desktop du site Michel Ferrand : sélection Nos pièces incontournables, fiche Enfilade Vertigo, et page Nos collections.",
+      },
     ],
   },
   {
@@ -173,6 +210,20 @@ export const projects: Project[] = [
     impact:
       "3 piliers de différenciation identifiés qu'aucun acteur du marché ne combine à ce jour.",
     impactStats: [{ value: "3", label: "piliers de différenciation" }],
+    gallery: [
+      {
+        src: petcareGallery1,
+        alt: "Mockup isométrique du dashboard sitter PetCare Connect : vue calendrier mensuelle avec réservations, liste des demandes entrantes, messagerie avec fiche client contextuelle, et écran Statistiques & Revenus affichant 680 € sur le mois et une note moyenne de 4,9/5.",
+      },
+      {
+        src: petcareGallery2,
+        alt: "Planche de benchmark concurrentiel du marché français du pet sitting : analyse comparée d'Animaute, Emprunte Mon Toutou et Holidog avec points forts et faibles de chacun, synthèse des bonnes pratiques du marché face aux opportunités de différenciation, et trois blocs d'hypothèses utilisateurs par persona (propriétaire, candidat sitter, sitter inscrit).",
+      },
+      {
+        src: petcareGallery3,
+        alt: "Planche des six décisions UX/UI structurantes de PetCare Connect, chacune reliée à un constat de benchmark et à une hypothèse utilisateur : toggle double cible, contexte client enrichi en messagerie, revenus affichés côté sitter, messagerie par personne, demandes en vue d'ensemble, export DAC7 intégré.",
+      },
+    ],
   },
 ];
 
