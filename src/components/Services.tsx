@@ -55,7 +55,18 @@ export default function Services() {
             </ul>
 
             <div className="mt-10 pt-2">
-              <Button onClick={() => setDevisOuvert(true)}>
+              {/*
+                Safari macOS ne donne pas le focus à un <button> au clic
+                souris : sans ce focus explicite, la modale mémoriserait
+                <body> comme déclencheur et lui rendrait le focus à la
+                fermeture, au lieu de le rendre à ce bouton.
+              */}
+              <Button
+                onClick={(e) => {
+                  e.currentTarget.focus();
+                  setDevisOuvert(true);
+                }}
+              >
                 Demander un devis
               </Button>
             </div>

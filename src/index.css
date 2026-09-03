@@ -378,3 +378,102 @@ body {
     animation-name: modal-pop;
   }
 }
+
+/*
+ * Visionneuse plein écran : le fond se fond, l'image apparaît en montant très
+ * légèrement en échelle. La `key` React rejoue `lightbox-media` à chaque
+ * changement d'image. Le bloc prefers-reduced-motion plus haut neutralise les
+ * deux animations d'un coup.
+ */
+@keyframes lightbox-fade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes lightbox-media {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.lightbox-overlay {
+  animation: lightbox-fade var(--noven-duration-route) var(--noven-ease-out)
+    both;
+}
+
+.lightbox-media {
+  animation: lightbox-media var(--noven-duration-route) var(--noven-ease-out)
+    both;
+}
+
+/*
+ * Une grille unique, deux dispositions via grid-template-areas : chaque
+ * élément n'existe qu'une fois dans le DOM, l'ordre de tabulation reste donc
+ * stable d'un format à l'autre.
+ *
+ * Les flèches occupent leurs propres colonnes plutôt que d'être posées en
+ * absolu sur l'image : quel que soit son ratio, elle n'en recouvre aucune et
+ * réciproquement. Sous 640px les gouttières mangeraient la largeur utile —
+ * les flèches passent alors sous l'image, de part et d'autre du compteur.
+ */
+.lightbox-grid {
+  display: grid;
+  gap: 1rem;
+  align-items: center;
+  justify-items: center;
+  grid-template-columns: 44px minmax(0, 1fr) 44px;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  grid-template-areas:
+    'fermer fermer fermer'
+    'image image image'
+    'prec compte suiv';
+}
+
+/* Une seule image : pas de flèches, donc pas de gouttières à réserver. */
+.lightbox-grid--solo {
+  grid-template-columns: 0 minmax(0, 1fr) 0;
+}
+
+.lightbox-count {
+  grid-area: compte;
+}
+.lightbox-close {
+  grid-area: fermer;
+  justify-self: end;
+}
+.lightbox-media {
+  grid-area: image;
+}
+.lightbox-prev {
+  grid-area: prec;
+}
+.lightbox-next {
+  grid-area: suiv;
+}
+
+@media (min-width: 640px) {
+  .lightbox-grid {
+    grid-template-columns: 72px minmax(0, 1fr) 72px;
+    grid-template-rows: auto minmax(0, 1fr);
+    grid-template-areas:
+      'compte compte fermer'
+      'prec image suiv';
+  }
+
+  .lightbox-grid--solo {
+    grid-template-columns: 0 minmax(0, 1fr) 0;
+  }
+
+  .lightbox-count {
+    justify-self: start;
+  }
+}

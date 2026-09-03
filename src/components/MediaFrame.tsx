@@ -6,6 +6,8 @@ type Props = {
   /** Italic serif placeholder shown while artwork is pending. */
   label?: string;
   ratio?: keyof typeof ratios;
+  /** `lazy` pour une image hors de l'écran au chargement. Laissé au navigateur sinon. */
+  loading?: "lazy" | "eager";
   border?: keyof typeof borders;
   className?: string;
   /** Styling hook on the media layer, e.g. a hover zoom driven by a parent group. */
@@ -19,6 +21,7 @@ type Props = {
 const ratios = {
   "16/10": "aspect-[16/10]",
   "16/9": "aspect-[16/9]",
+  "4/3": "aspect-[4/3]",
   "4/5": "aspect-[4/5]",
 };
 
@@ -36,6 +39,7 @@ export default function MediaFrame({
   alt,
   label,
   ratio = "16/10",
+  loading,
   border = "hairline",
   className = "",
   mediaClassName = "",
@@ -49,7 +53,12 @@ export default function MediaFrame({
         className={`absolute inset-0 flex items-center justify-center ${mediaClassName}`}
       >
         {src ? (
-          <img src={src} alt={alt} className="h-full w-full object-cover" />
+          <img
+            src={src}
+            alt={alt}
+            loading={loading}
+            className="h-full w-full object-cover"
+          />
         ) : (
           <span
             className={`px-6 text-center font-serif italic text-muted ${labelClassName}`}
