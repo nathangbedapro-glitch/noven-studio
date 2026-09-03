@@ -138,7 +138,7 @@ export const projects: Project[] = [
     gallery: [
       {
         src: carrefourGallery1,
-        alt: "Plusieurs écrans tablette disposés en perspective isométrique sur un dégradé orange et rose : le tableau de bord « Ma délégation » avec son classement et son bouton d'invitation de collègues, une carte de France interactive localisant les délégations, la page Actualités et ses publications de collaborateurs, et le formulaire d'inscription au tournoi.",
+        alt: "Plusieurs écrans tablette disposés en perspective isométrique sur un dégradé orange et rose : le tableau de bord « Ma délégation » avec son classement et son bouton d'invitation de collègues, la carte de France interactive des délégations, l'écran des challenges et leurs justificatifs, la page Actualités et ses publications de collaborateurs, et le formulaire d'inscription au tournoi.",
       },
       {
         src: carrefourGallery2,
