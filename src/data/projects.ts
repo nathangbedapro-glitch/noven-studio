@@ -217,11 +217,11 @@ export const projects: Project[] = [
       },
       {
         src: petcareGallery2,
-        alt: "Planche de benchmark concurrentiel du marché français du pet sitting : analyse comparée d'Animaute, Emprunte Mon Toutou et Holidog avec points forts et faibles de chacun, synthèse des bonnes pratiques du marché face aux opportunités de différenciation, et trois blocs d'hypothèses utilisateurs par persona (propriétaire, candidat sitter, sitter inscrit).",
+        alt: "Écran Messagerie du dashboard sitter PetCare Connect : liste des conversations à gauche, fil de discussion avec un propriétaire au centre, et panneau contextuel à droite regroupant la garde en cours (18-20 mars, 25 € par nuit), la fiche de l'animal avec ses allergies, et l'avis 5 étoiles laissé par le client.",
       },
       {
         src: petcareGallery3,
-        alt: "Planche des six décisions UX/UI structurantes de PetCare Connect, chacune reliée à un constat de benchmark et à une hypothèse utilisateur : toggle double cible, contexte client enrichi en messagerie, revenus affichés côté sitter, messagerie par personne, demandes en vue d'ensemble, export DAC7 intégré.",
+        alt: "Écran Statistiques & Revenus du dashboard sitter PetCare Connect : quatre indicateurs clés (680 € de revenus sur le mois, 8 gardes réalisées, note moyenne de 4,9 sur 5, 96 % de clients satisfaits), histogramme des revenus sur douze mois, répartition des types de prestations en anneau, et listes des clients les plus fidèles et des derniers avis.",
       },
     ],
   },
