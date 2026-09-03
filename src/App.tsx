@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { Analytics } from "@vercel/analytics/react";
 import Nav from "./components/Nav";
 import Hero from "./components/Hero";
 import Manifesto from "./components/Manifesto";
@@ -124,6 +125,7 @@ export default function App() {
         )}
       </main>
       <Footer />
+      <Analytics />
     </div>
   );
 }

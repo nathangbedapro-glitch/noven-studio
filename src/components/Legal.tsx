@@ -261,21 +261,33 @@ export default function Legal() {
               .
             </Row>
             <Row label="Données collectées">
-              À ce jour, ce site ne comporte aucun formulaire de collecte de
-              données ni outil de mesure d'audience. Les polices de caractères
-              sont hébergées sur nos propres serveurs : aucune requête vers un
-              service tiers n'est émise lors du chargement des pages, et aucun
-              tiers ne reçoit donc votre adresse IP à cette occasion. Si vous
-              nous contactez par email, les informations transmises (nom, email,
-              message) sont utilisées uniquement pour répondre à votre demande et
-              ne sont ni conservées au-delà du traitement de l'échange, ni cédées
-              à des tiers.
+              Ce site ne comporte aucun formulaire de collecte de données. Les
+              polices de caractères sont hébergées sur nos propres serveurs, et
+              le script de mesure d'audience est servi depuis notre propre nom de
+              domaine : aucune requête vers un domaine tiers n'est émise lors du
+              chargement des pages. Si vous nous contactez par email, les
+              informations transmises (nom, email, message) sont utilisées
+              uniquement pour répondre à votre demande et ne sont ni conservées
+              au-delà du traitement de l'échange, ni cédées à des tiers.
+            </Row>
+            <Row label="Mesure d'audience">
+              Ce site utilise Vercel Web Analytics, fourni par Vercel Inc.,
+              également hébergeur du site. Cet outil comptabilise les pages vues
+              et les données techniques associées (page consultée, référent, type
+              d'appareil, pays) à seule fin de mesurer la fréquentation. Il
+              n'utilise ni cookie, ni identifiant persistant, ni empreinte de
+              navigateur, et ne permet ni le suivi d'un visiteur d'un site à
+              l'autre, ni la reconstitution de son parcours individuel. Les
+              données sont agrégées et ne permettent pas de vous identifier. Le
+              traitement repose sur l'intérêt légitime de l'éditeur à connaître
+              l'audience de son site.
             </Row>
             <Row label="Hébergement et transfert hors UE">
               Le site est hébergé par Vercel Inc., société établie aux
               États-Unis. À ce titre, les journaux techniques du serveur (adresse
-              IP, horodatage, page demandée), conservés à des fins de sécurité et
-              de fonctionnement, font l'objet d'un transfert hors de l'Union
+              IP, horodatage, page demandée) conservés à des fins de sécurité et
+              de fonctionnement, ainsi que les statistiques de fréquentation
+              décrites ci-dessus, font l'objet d'un transfert hors de l'Union
               européenne, encadré par les clauses contractuelles types de la
               Commission européenne.
             </Row>
@@ -294,23 +306,29 @@ export default function Legal() {
             </Row>
             <Row label="Évolution">
               Cette politique sera mise à jour si le site intègre à l'avenir un
-              formulaire, une newsletter ou un outil de mesure d'audience.
+              formulaire, une newsletter, ou un outil de suivi allant au-delà de
+              la mesure d'audience anonyme décrite ci-dessus.
             </Row>
           </Section>
 
           <Section {...sections[4]}>
             <p>
-              Ce site n'utilise actuellement aucun cookie non essentiel (pas de
-              mesure d'audience, pas de cookie publicitaire ou tiers). Seuls des
-              cookies strictement techniques, indispensables au bon
-              fonctionnement du site, peuvent être déposés — sans consentement
-              requis pour ceux-ci.
+              Ce site ne dépose aucun cookie publicitaire ni cookie de suivi
+              tiers. L'outil de mesure d'audience décrit à la section
+              Confidentialité fonctionne sans cookie et sans identifiant
+              persistant : rien n'est écrit ni lu dans votre navigateur à cette
+              occasion. Seuls des cookies strictement techniques, indispensables
+              au bon fonctionnement du site, peuvent être déposés — sans
+              consentement requis pour ceux-ci.
             </p>
             <p>
-              Si un outil de mesure d'audience ou de suivi est ajouté
-              ultérieurement, un bandeau de consentement conforme sera mis en
-              place avant toute collecte, et cette page sera mise à jour en
-              conséquence.
+              La mesure d'audience étant limitée à la production de statistiques
+              anonymes, sans recoupement avec d'autres traitements ni transmission
+              à des tiers, elle relève de l'exemption de consentement prévue par
+              la CNIL pour les outils de mesure d'audience. Si un outil de suivi
+              plus intrusif venait à être ajouté, un bandeau de consentement
+              conforme serait mis en place avant toute collecte et cette page
+              serait mise à jour en conséquence.
             </p>
           </Section>
 
