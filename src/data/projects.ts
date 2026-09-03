@@ -138,7 +138,7 @@ export const projects: Project[] = [
     gallery: [
       {
         src: carrefourGallery1,
-        alt: "Maquette tablette de la page d'accueil du Grand Tournoi : le titre en capitales blanches sur un dégradé orange et rose, six collaborateurs en tenue de sport dont une joueuse en fauteuil roulant, un compte à rebours avant le début du tournoi et une alerte « délégation en cours de constitution ».",
+        alt: "Plusieurs écrans tablette disposés en perspective isométrique sur un dégradé orange et rose : le tableau de bord « Ma délégation » avec son classement et son bouton d'invitation de collègues, une carte de France interactive localisant les délégations, la page Actualités et ses publications de collaborateurs, et le formulaire d'inscription au tournoi.",
       },
       {
         src: carrefourGallery2,
