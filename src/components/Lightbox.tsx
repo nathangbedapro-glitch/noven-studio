@@ -1,7 +1,16 @@
-import { useEffect, useId } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useDialog } from "../hooks/useDialog";
 import type { GalleryImage } from "../data/projects";
+
+/**
+ * En dessous de ce ratio, contraindre l'image en hauteur la réduirait à une
+ * largeur où son texte devient illisible. Elle passe alors en mode document :
+ * pleine largeur, hauteur libre, conteneur défilant. Le seuil s'applique au
+ * ratio réel lu à l'affichage, jamais à une liste de fichiers codée en dur.
+ */
+export const RATIO_DOCUMENT = 0.8;
+export const estFormatDocument = (ratio: number) => ratio < RATIO_DOCUMENT;
 
 /** Cible tactile de 44×44 px, fond opaque : lisible quelle que soit l'image dessous. */
 const commande =
@@ -43,6 +52,20 @@ export default function Lightbox({
   const open = index !== null;
   const panelRef = useDialog<HTMLDivElement>(open, onClose);
   const compteurId = useId();
+  const docRef = useRef<HTMLDivElement>(null);
+
+  // Ratio mesuré sur l'image affichée. `null` tant qu'on ne sait pas : on
+  // reste alors en mode standard, qui est le cas des huit images sur neuf.
+  const [ratio, setRatio] = useState<number | null>(null);
+  const mesurer = (img: HTMLImageElement | null) => {
+    if (!img) return;
+    setRatio(img.naturalWidth ? img.naturalWidth / img.naturalHeight : null);
+  };
+
+  // Un changement d'image repart en haut du document, comme un nouveau PDF.
+  useEffect(() => {
+    docRef.current?.scrollTo({ top: 0 });
+  }, [index]);
 
   // Flèches du clavier, en boucle. Le hook occupe déjà la phase de capture
   // pour Échap et Tab ; celui-ci écoute au bouillonnement.
@@ -62,6 +85,7 @@ export default function Lightbox({
 
   const image = images[index];
   const plusieurs = images.length > 1;
+  const modeDocument = ratio !== null && estFormatDocument(ratio);
   const aller = (pas: number) =>
     onIndexChange((index + pas + images.length) % images.length);
 
@@ -129,13 +153,39 @@ export default function Lightbox({
           </svg>
         </button>
 
-        {/* La `key` relance l'animation d'apparition à chaque changement. */}
-        <img
-          key={image.src}
-          src={image.src}
-          alt={image.alt}
-          className="lightbox-media max-h-full max-w-full rounded-[3px] object-contain"
-        />
+        {/*
+          La `key` relance l'animation d'apparition à chaque changement.
+          En mode document l'image n'est plus contrainte en hauteur : c'est le
+          conteneur qui l'est, et qui défile. Il est focalisable pour que les
+          flèches haut/bas le fassent défiler au clavier — sans quoi la zone
+          serait inatteignable autrement qu'à la souris.
+        */}
+        {modeDocument ? (
+          <div
+            ref={docRef}
+            tabIndex={0}
+            role="region"
+            aria-label="Image au format document, défilement vertical"
+            className="lightbox-doc"
+          >
+            <img
+              key={image.src}
+              ref={mesurer}
+              onLoad={(e) => mesurer(e.currentTarget)}
+              src={image.src}
+              alt={image.alt}
+            />
+          </div>
+        ) : (
+          <img
+            key={image.src}
+            ref={mesurer}
+            onLoad={(e) => mesurer(e.currentTarget)}
+            src={image.src}
+            alt={image.alt}
+            className="lightbox-media max-h-full max-w-full rounded-[3px] object-contain"
+          />
+        )}
 
         {plusieurs && (
           <>

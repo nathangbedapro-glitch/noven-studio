@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Eyebrow from "./Eyebrow";
 import Contact from "./Contact";
-import Lightbox from "./Lightbox";
+import Lightbox, { estFormatDocument } from "./Lightbox";
 import MediaFrame from "./MediaFrame";
 import { useReveal } from "../hooks/useReveal";
 import type { GalleryImage, Project } from "../data/projects";
@@ -33,13 +33,38 @@ function Gallery({ images }: { images: GalleryImage[] }) {
   // L'index vit ici : la visionneuse peut ainsi rendre le focus à la miniature
   // exacte qui l'a ouverte, et non au corps du document.
   const [agrandie, setAgrandie] = useState<number | null>(null);
+  const listeRef = useRef<HTMLUListElement>(null);
+  // Index des miniatures au format document : leur recadrage 4/3 part du haut,
+  // pour que le titre de la planche serve d'accroche plutôt qu'un fragment de
+  // son milieu. Le ratio est mesuré à l'affichage, comme dans la visionneuse.
+  const [hautes, setHautes] = useState<Record<number, boolean>>({});
+
+  useEffect(() => {
+    const liste = listeRef.current;
+    if (!liste) return;
+    // `load` ne remonte pas mais se capture : un seul écouteur sur la liste
+    // suffit, et les miniatures arrivent au fil du lazy loading.
+    const onLoad = (e: Event) => {
+      const img = e.target;
+      if (!(img instanceof HTMLImageElement) || !img.naturalWidth) return;
+      if (!estFormatDocument(img.naturalWidth / img.naturalHeight)) return;
+      const i = [...liste.querySelectorAll("img")].indexOf(img);
+      if (i >= 0) setHautes((h) => (h[i] ? h : { ...h, [i]: true }));
+    };
+    liste.addEventListener("load", onLoad, true);
+    return () => liste.removeEventListener("load", onLoad, true);
+  }, []);
 
   return (
     <section className="px-6 pb-24 md:px-10 md:pb-32">
       <div className="mx-auto max-w-[1000px]">
         <Eyebrow as="h2">Galerie</Eyebrow>
         {/* Le reset Tailwind retire la sémantique de liste dans Safari : role la rétablit. */}
-        <ul role="list" className={`mt-8 grid grid-cols-1 gap-6 ${colonnes}`}>
+        <ul
+          ref={listeRef}
+          role="list"
+          className={`mt-8 grid grid-cols-1 gap-6 ${colonnes}`}
+        >
           {images.map((img, i) => (
             <li
               key={img.src}
@@ -71,6 +96,7 @@ function Gallery({ images }: { images: GalleryImage[] }) {
                   alt={img.alt}
                   ratio="4/3"
                   loading="lazy"
+                  imageClassName={hautes[i] ? "object-top" : ""}
                   mediaClassName="transition-transform duration-500 ease-out group-hover:scale-[1.03]"
                 />
               </button>

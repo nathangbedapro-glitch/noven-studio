@@ -14,6 +14,8 @@ type Props = {
   mediaClassName?: string;
   /** Styling hook on the placeholder text, whose size varies by context. */
   labelClassName?: string;
+  /** Styling hook on the image itself, par exemple pour caler le recadrage. */
+  imageClassName?: string;
 };
 
 // Tailwind only sees class names that appear literally in the source, so the
@@ -44,6 +46,7 @@ export default function MediaFrame({
   className = "",
   mediaClassName = "",
   labelClassName = "text-[16px]",
+  imageClassName = "",
 }: Props) {
   return (
     <div
@@ -57,7 +60,7 @@ export default function MediaFrame({
             src={src}
             alt={alt}
             loading={loading}
-            className="h-full w-full object-cover"
+            className={`h-full w-full object-cover ${imageClassName}`}
           />
         ) : (
           <span
