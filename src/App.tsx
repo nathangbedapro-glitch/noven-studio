@@ -18,6 +18,26 @@ import { getProject } from "./data/projects";
 const SITE_DESCRIPTION =
   "Studio de web design freelance spécialisé dans la refonte de sites pour professions libérales — avocats, kinés, coachs.";
 
+/** Domaine canonique. Le sous-domaine Vercel n'y répond plus qu'en 308. */
+const ORIGINE = "https://novenstudio.fr";
+
+/**
+ * Écrit une balise meta, en la créant si le shell ne la porte pas. Les
+ * propriétés Open Graph s'identifient par `property`, les autres par `name`.
+ */
+function definirMeta(cle: string, valeur: string) {
+  const attribut = cle.startsWith("og:") ? "property" : "name";
+  let balise = document.head.querySelector<HTMLMetaElement>(
+    `meta[${attribut}="${cle}"]`,
+  );
+  if (!balise) {
+    balise = document.createElement("meta");
+    balise.setAttribute(attribut, cle);
+    document.head.appendChild(balise);
+  }
+  balise.setAttribute("content", valeur);
+}
+
 function Home() {
   return (
     <>
@@ -68,22 +88,30 @@ export default function App() {
       ? {
           title: `${project.name} — Réalisation Noven Studio`,
           description: project.description,
+          url: `${ORIGINE}/#/projects/${project.slug}`,
         }
       : isLegal
         ? {
             title: "Mentions légales et conditions — Noven Studio",
             description:
               "Mentions légales, conditions générales de vente et d'utilisation, politique de confidentialité et cookies de Noven Studio.",
+            // Forme canonique : les ancres de section (#legal-04) désignent la
+            // même page et ne doivent pas produire une URL de partage distincte.
+            url: `${ORIGINE}/#legal`,
           }
         : {
             title: "Noven Studio — Web design pour professions libérales",
             description: SITE_DESCRIPTION,
+            url: `${ORIGINE}/`,
           };
 
     document.title = meta.title;
-    document
-      .querySelector('meta[name="description"]')
-      ?.setAttribute("content", meta.description);
+    definirMeta("description", meta.description);
+    definirMeta("og:title", meta.title);
+    definirMeta("og:description", meta.description);
+    definirMeta("og:url", meta.url);
+    definirMeta("twitter:title", meta.title);
+    definirMeta("twitter:description", meta.description);
   }, [project?.slug, isLegal]);
 
   // Keying the wrapper on the route remounts it on every navigation, which

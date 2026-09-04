@@ -9,19 +9,29 @@
     <!--
       og:title et og:description sont injectés depuis .figma/make/site.json
       par le plugin figma-site-configuration (vite.config.ts) : ne pas les
-      redéclarer ici, ce serait un doublon. L'aperçu de lien exige une URL
-      absolue, donc le domaine de déploiement est écrit en dur.
+      redéclarer ici, ce serait un doublon.
+
+      Les robots d'aperçu ne résolvent pas les URL relatives : le domaine est
+      donc écrit en dur. Il pointe le domaine canonique et non le sous-domaine
+      Vercel, qui n'y répond plus qu'en 308 — une redirection que tous les
+      robots ne suivent pas pour aller chercher une image.
+
+      Ces valeurs sont celles de l'accueil. App.tsx les réécrit par route au
+      montage ; c'est sans effet sur les robots qui n'exécutent pas JavaScript,
+      qui ne verront jamais que ce shell (le fragment de hash n'atteint pas le
+      serveur).
     -->
+    <meta property="og:url" content="https://novenstudio.fr/" />
     <meta
       property="og:image"
-      content="https://noven-studio.vercel.app/og-image-landscape.jpg"
+      content="https://novenstudio.fr/og-image-landscape.jpg"
     />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:image"
-      content="https://noven-studio.vercel.app/og-image-landscape.jpg"
+      content="https://novenstudio.fr/og-image-landscape.jpg"
     />
     <!-- figma:head-end -->
   </head>
