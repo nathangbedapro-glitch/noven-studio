@@ -68,7 +68,7 @@ export default function Workflow() {
             votre page d'accueil. Gratuitement, sans engagement.
           </p>
           <p className="mt-2 text-[14px] italic text-muted">
-            Vous voyez à quoi ressemblera votre site avant de décider.
+            Vous voyez à quoi ressemblera votre site avant de&nbsp;décider.
           </p>
         </div>
       </div>
