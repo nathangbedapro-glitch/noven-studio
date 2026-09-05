@@ -53,6 +53,24 @@ export default function Workflow() {
             </li>
           ))}
         </ol>
+
+        {/*
+          Frère du <ol>, jamais un de ses enfants : ce bloc n'est pas une
+          sixième étape, il dit ce qui précède la première. Le `mt-16` est
+          celui qui sépare déjà le titre de la liste, et il dépasse le
+          `gap-y-12` entre étapes — l'écart plus large signale la rupture.
+          Aucun terracotta ici : à 4,45:1 sur beige il échoue en petit texte.
+        */}
+        <div className="mt-16 max-w-[860px] border-t border-hairline pt-5">
+          <h3 className="text-[16px] font-semibold">Avant de vous engager</h3>
+          <p className="mt-2 text-[16px] leading-relaxed text-muted">
+            Après un premier échange de 30 minutes, je conçois la page
+            d'accueil de votre futur site. Gratuitement, sans engagement.
+          </p>
+          <p className="mt-2 text-[14px] italic text-muted">
+            Vous voyez le résultat avant de décider.
+          </p>
+        </div>
       </div>
     </section>
   );
