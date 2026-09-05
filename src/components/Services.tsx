@@ -94,6 +94,24 @@ export default function Services() {
               <div className="border-t border-hairline pt-7">
                 <div className="flex items-baseline justify-between gap-4">
                   <h4 className="text-[16px] font-semibold">
+                    Boutique en ligne
+                  </h4>
+                  <span className="font-serif text-[1.4rem] text-terracotta">
+                    +700&nbsp;€
+                  </span>
+                </div>
+                <p className="mt-2 text-[16px] leading-relaxed text-muted">
+                  Catalogue produits, panier, paiement sécurisé, suivi des
+                  commandes.
+                </p>
+                <p className="mt-2 text-[14px] italic text-muted">
+                  Catalogue volumineux ou fonctions avancées : devis séparé.
+                </p>
+              </div>
+
+              <div className="border-t border-hairline pt-7">
+                <div className="flex items-baseline justify-between gap-4">
+                  <h4 className="text-[16px] font-semibold">
                     Maintenance mensuelle
                   </h4>
                   <span className="font-serif text-[1.4rem] text-terracotta">
