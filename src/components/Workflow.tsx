@@ -64,11 +64,11 @@ export default function Workflow() {
         <div className="mt-16 max-w-[860px] border-t border-hairline pt-5">
           <h3 className="text-[16px] font-semibold">Avant de vous engager</h3>
           <p className="mt-2 text-[16px] leading-relaxed text-muted">
-            Après un premier échange de 30 minutes, je conçois la page
-            d'accueil de votre futur site. Gratuitement, sans engagement.
+            Après un premier échange, je conçois la maquette visuelle de
+            votre page d'accueil. Gratuitement, sans engagement.
           </p>
           <p className="mt-2 text-[14px] italic text-muted">
-            Vous voyez le résultat avant de décider.
+            Vous voyez à quoi ressemblera votre site avant de décider.
           </p>
         </div>
       </div>
