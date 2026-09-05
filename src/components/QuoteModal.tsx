@@ -16,6 +16,7 @@ export type Brouillon = {
   profession: string;
   besoin: string;
   seo: boolean;
+  boutique: boolean;
   maintenance: boolean;
   siteActuel: string;
 };
@@ -26,6 +27,7 @@ export const BROUILLON_VIDE: Brouillon = {
   profession: "",
   besoin: "",
   seo: false,
+  boutique: false,
   maintenance: false,
   siteActuel: "",
 };
@@ -124,6 +126,7 @@ export default function QuoteModal({
 
   const options = [
     brouillon.seo && "SEO Complet (+500 €)",
+    brouillon.boutique && "Boutique en ligne (+700 €)",
     brouillon.maintenance && "Maintenance mensuelle (120 €/mois)",
   ].filter(Boolean);
 
@@ -309,7 +312,7 @@ export default function QuoteModal({
 
             {/*
               Groupe de cases : le <fieldset> et sa <legend> donnent aux lecteurs
-              d'écran le contexte commun aux deux options. La cible tactile est
+              d'écran le contexte commun aux trois options. La cible tactile est
               le <label> entier (min-h-11), pas la case de 20px.
             */}
             <fieldset className="border-0 p-0">
@@ -325,6 +328,16 @@ export default function QuoteModal({
                   className="h-5 w-5 shrink-0 accent-terracotta"
                 />
                 SEO Complet (+500&nbsp;€)
+              </label>
+              <label className="flex min-h-11 cursor-pointer items-center gap-3 text-[16px] text-ink">
+                <input
+                  type="checkbox"
+                  name="boutique"
+                  checked={brouillon.boutique}
+                  onChange={(e) => maj("boutique", e.target.checked)}
+                  className="h-5 w-5 shrink-0 accent-terracotta"
+                />
+                Boutique en ligne (+700&nbsp;€)
               </label>
               <label className="flex min-h-11 cursor-pointer items-center gap-3 text-[16px] text-ink">
                 <input
